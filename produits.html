@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue – SAM VOLAILLE | Couveuses à Bamako</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        :root { --vert-fonce: #1b5e20; --vert-moyen: #2e7d32; --vert-clair: #66bb6a; --jaune: #fbc02d; --gris-fond: #f8faf8; --blanc: #ffffff; --noir: #1a1a1a; }
+        body { background: var(--gris-fond); color: #333; line-height: 1.7; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+
+        /* ANIMATIONS */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* NAVBAR */
+        nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #eaeaea; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 12px 0; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        
+        /* LOGO IMAGE */
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 55px; width: auto; display: block; }
+        .logo-text { font-size: 1.6rem; font-weight: 900; letter-spacing: 1px; color: var(--vert-fonce); line-height: 1.2; }
+        .logo-sam { color: var(--jaune); }
+        
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 600; font-size: 0.95rem; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ""; position: absolute; bottom: -6px; left: 0; width: 0; height: 3px; background: var(--vert-moyen); border-radius: 3px; transition: width 0.3s; }
+        .nav-links a:hover { color: var(--vert-moyen); } .nav-links a:hover::after { width: 100%; }
+        .cta-nav { background: var(--vert-fonce); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(27,94,32,0.2); }
+        .cta-nav:hover { background: var(--jaune); color: var(--noir); box-shadow: 0 4px 15px rgba(251,192,45,0.4); }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; }
+        .hamburger span { width: 25px; height: 3px; background: var(--vert-fonce); margin: 4px 0; transition: 0.4s; }
+
+        /* SECTIONS */
+        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .sec-title { text-align: center; margin-bottom: 50px; }
+        .sec-tag { display: inline-block; background: var(--vert-moyen); color: white; padding: 6px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        h2 { font-size: 2.6rem; font-weight: 800; color: var(--vert-fonce); }
+        .underline { width: 70px; height: 4px; background: var(--jaune); margin: 15px auto; border-radius: 2px; }
+        .subtitle-sec { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem; }
+
+        /* FILTRES */
+        .filter-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 50px; }
+        .filter-btn { padding: 12px 25px; background: white; border: 2px solid var(--vert-fonce); color: var(--vert-fonce); border-radius: 50px; cursor: pointer; font-weight: 700; font-size: 0.95rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .filter-btn.active, .filter-btn:hover { background: linear-gradient(135deg, var(--vert-fonce), var(--vert-moyen)); color: white; transform: translateY(-3px); }
+
+        /* CARTES PRODUITS */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: all 0.4s ease; position: relative; border: 1px solid #f0f0f0; display: flex; flex-direction: column; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-color: #e0e0e0; }
+        .card-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s; }
+        .product-card:hover .card-img { transform: scale(1.1); }
+        .card-badge { position: absolute; top: 15px; left: 15px; background: white; color: var(--vert-fonce); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; }
+        .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-cat { font-size: 0.8rem; font-weight: 700; color: var(--vert-moyen); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: #333; }
+        .card-price { font-size: 1.8rem; font-weight: 800; color: var(--vert-fonce); margin-bottom: 20px; margin-top: auto; }
+        .card-btn { display: block; background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; position: relative; overflow: hidden; transition: all 0.3s; }
+        .card-btn::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+        .card-btn:hover::before { left: 100%; } .card-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(37,211,102,0.3); }
+
+        /* TABLEAUX PRIX */
+        .price-table-container { background: white; border-radius: 20px; padding: 30px; margin-bottom: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow-x: auto; }
+        .price-table-title { color: var(--vert-fonce); font-size: 2rem; text-align: center; margin-bottom: 25px; font-weight: 800; }
+        table { width: 100%; border-collapse: collapse; min-width: 400px; }
+        th, td { padding: 18px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+        th { background: linear-gradient(135deg, var(--vert-fonce), var(--vert-moyen)); color: white; font-size: 1rem; }
+        td { font-size: 1rem; transition: background 0.2s; }
+        tr:hover td { background: #f8faf8; }
+        td:nth-child(2) { font-weight: 700; color: var(--vert-fonce); }
+
+        /* FOOTER */
+        footer { background: #0d1117; color: #ddd; padding: 70px 20px 30px; position: relative; }
+        footer::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--jaune), var(--vert-moyen), var(--jaune)); }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-col h3 { color: white; font-size: 1.3rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+        .footer-col h3::after { content: ""; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--jaune); border-radius: 2px; }
+        .footer-about p { color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px; }
+        .footer-socials { display: flex; gap: 15px; }
+        .social-icon { width: 40px; height: 40px; background: #1f2933; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.2rem; transition: all 0.3s; }
+        .social-icon:hover { background: var(--jaune); color: #333; transform: translateY(-3px); }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: #aaa; text-decoration: none; transition: all 0.3s; display: flex; align-items: center; gap: 10px; }
+        .footer-links a:hover { color: var(--jaune); transform: translateX(8px); }
+        .footer-links a::before { content: "→"; color: var(--vert-moyen); font-size: 0.8rem; }
+        .footer-contact p { color: #aaa; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .footer-contact i { color: var(--jaune); font-style: normal; }
+        .footer-bottom { text-align: center; border-top: 1px solid #333; padding-top: 25px; }
+        .footer-bottom p { color: #888; font-size: 0.9rem; }
+        .footer-bottom a { color: var(--jaune); text-decoration: none; }
+
+        /* WHATSAPP FLOTTANT */
+        .float-wa { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; color: white; box-shadow: 0 8px 20px rgba(37,211,102,0.4); z-index: 999; transition: transform 0.3s; animation: pulse 2s infinite; text-decoration: none; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+        .float-wa:hover { transform: scale(1.1) rotate(10deg); }
+
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 70px; left: 0; width: 100%; height: auto; background: white; flex-direction: column; gap: 15px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.3s; }
+            .nav-links.active { opacity: 1; pointer-events: all; transform: translateY(0); }
+            .nav-links a { font-size: 1.2rem; }
+            .hamburger { display: flex; z-index: 1001; }
+            section { padding: 60px 15px; }
+            h2 { font-size: 2.2rem; }
+            .logo-img { height: 45px; }
+            .logo-text { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <!-- 👇 REMPLACEZ ICI par votre logo image -->
+                <img src="images/logo.png" alt="Logo SAM VOLAILLE" class="logo-img">
+                <span class="logo-text"><span class="logo-sam">SAM</span> <span class="logo-text">VOLAILLE</span> 🐣</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#produits">Nos couveuses</a></li>
+                <li><a href="#prix">Prix</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+            <a href="https://wa.me/22373020233" target="_blank" class="cta-nav">WhatsApp</a>
+        </div>
+    </nav>
+
+    <!-- CATALOGUE PRODUITS -->
+    <section id="produits">
+        <div class="sec-title reveal">
+            <div class="sec-tag">Catalogue complet</div>
+            <h2>Nos couveuses</h2>
+            <div class="underline"></div>
+            <p class="subtitle-sec">Filtrez par type pour trouver le modèle adapté à votre élevage</p>
+        </div>
+        
+        <div class="filter-buttons reveal">
+            <button class="filter-btn active" onclick="filterProducts('all', this)">Toutes</button>
+            <button class="filter-btn" onclick="filterProducts('manuelle', this)">Manuelles</button>
+            <button class="filter-btn" onclick="filterProducts('semi-auto', this)">Semi-automatiques</button>
+            <button class="filter-btn" onclick="filterProducts('auto', this)">Automatiques</button>
+        </div>
+
+        <div class="product-grid">
+            <!-- MODELE 1 : Manuelle -->
+            <div class="product-card reveal" data-category="manuelle">
+                <span class="card-badge">Manuelle</span>
+                <img class="card-img" src="images/3_400.jpeg" alt="Couveuse manuelle">
+                <div class="card-body">
+                    <span class="card-cat">Manuelle</span>
+                    <h3 class="card-title">Modèle Compact</h3>
+                    <p class="card-price">À partir de 90 000 FCFA</p>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20couveuses%20manuelles." target="_blank" class="card-btn">Commander sur WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- MODELE 2 : Automatique -->
+            <div class="product-card reveal" data-category="auto" style="transition-delay:0.2s;">
+                <span class="card-badge">Automatique</span>
+                <img class="card-img" src="images/1_1000.jpeg" alt="Couveuse automatique">
+                <div class="card-body">
+                    <span class="card-cat">Automatique</span>
+                    <h3 class="card-title">Grande Capacité Pro</h3>
+                    <p class="card-price">À partir de 200 000 FCFA</p>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20couveuses%20automatiques." target="_blank" class="card-btn">Commander sur WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- MODELE 3 : Semi-auto -->
+            <div class="product-card reveal" data-category="semi-auto" style="transition-delay:0.4s;">
+                <span class="card-badge">Semi-auto</span>
+                <img class="card-img" src="images/1_400.jpeg" alt="Couveuse semi-automatique">
+                <div class="card-body">
+                    <span class="card-cat">Semi-automatique</span>
+                    <h3 class="card-title">Contrôle Digital</h3>
+                    <p class="card-price">À partir de 100 000 FCFA</p>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20couveuses%20semi-automatiques." target="_blank" class="card-btn">Commander sur WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TABLEAUX DES PRIX -->
+    <section id="prix">
+        <div class="sec-title reveal">
+            <div class="sec-tag">Tarifs 2026</div>
+            <h2>Catalogue des prix</h2>
+            <div class="underline"></div>
+        </div>
+
+        <div class="price-table-container reveal">
+            <h3 class="price-table-title">🟢 Couveuses manuelles</h3>
+            <table>
+                <thead><tr><th>Capacité</th><th>Prix</th></tr></thead>
+                <tbody>
+                    <tr><td>300 œufs</td><td>90 000 FCFA</td></tr>
+                    <tr><td>400 œufs</td><td>110 000 FCFA</td></tr>
+                    <tr><td>500 œufs</td><td>125 000 FCFA</td></tr>
+                    <tr><td>600 œufs</td><td>150 000 FCFA</td></tr>
+                    <tr><td>1 000 œufs</td><td>200 000 FCFA</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="price-table-container reveal">
+            <h3 class="price-table-title">🟡 Couveuses semi-automatiques</h3>
+            <table>
+                <thead><tr><th>Capacité</th><th>Prix</th></tr></thead>
+                <tbody>
+                    <tr><td>150 œufs</td><td>100 000 FCFA</td></tr>
+                    <tr><td>200 œufs</td><td>125 000 FCFA</td></tr>
+                    <tr><td>300 œufs</td><td>150 000 FCFA</td></tr>
+                    <tr><td>400 œufs</td><td>175 000 FCFA</td></tr>
+                    <tr><td>500 œufs</td><td>200 000 FCFA</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="price-table-container reveal">
+            <h3 class="price-table-title">🔵 Couveuses automatiques</h3>
+            <table>
+                <thead><tr><th>Capacité</th><th>Prix</th></tr></thead>
+                <tbody>
+                    <tr><td>200 œufs</td><td>200 000 FCFA</td></tr>
+                    <tr><td>300 œufs</td><td>225 000 FCFA</td></tr>
+                    <tr><td>400 œufs</td><td>250 000 FCFA</td></tr>
+                    <tr><td>500 œufs</td><td>300 000 FCFA</td></tr>
+                    <tr><td>600 œufs</td><td>325 000 FCFA</td></tr>
+                    <tr><td>700 œufs</td><td>350 000 FCFA</td></tr>
+                    <tr><td>800 œufs</td><td>375 000 FCFA</td></tr>
+                    <tr><td>900 œufs</td><td>400 000 FCFA</td></tr>
+                    <tr><td>1 000 œufs</td><td>500 000 FCFA</td></tr>
+                    <tr><td>1 200 œufs</td><td>600 000 FCFA</td></tr>
+                    <tr><td>1 400 œufs</td><td>700 000 FCFA</td></tr>
+                    <tr><td>1 500 œufs</td><td>800 000 FCFA</td></tr>
+                    <tr><td>2 000 œufs</td><td>900 000 FCFA</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col footer-about">
+                <h3>Qui sommes-nous ?</h3>
+                <p>SAM VOLAILLE est une entreprise malienne spécialisée dans la conception et la vente de couveuses d'œufs modernes. Basés à Bamako, nous accompagnons les éleveurs locaux.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">🐦</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="#produits">Catalogue couveuses</a></li>
+                    <li><a href="#prix">Tarifs et prix</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Coordonnées</h3>
+                <p><i>📍</i> Golf, Bamako, Mali</p>
+                <p><i>📞</i> +223 73 02 02 33</p>
+                <p><i>🕒</i> Lun - Sam : 08h00 - 18h00</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 <strong>SAM VOLAILLE</strong>. Tous droits réservés.</p>
+            <p style="margin-top:5px;">Fait avec ❤️ pour les éleveurs maliens</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/22373020233" target="_blank" class="float-wa">💬</a>
+
+    <script>
+        function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
+        function filterProducts(category, btn) {
+            const buttons = document.querySelectorAll(".filter-btn");
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const cards = document.querySelectorAll(".product-card");
+            cards.forEach(card => {
+                if (category === "all" || card.dataset.category === category) card.style.display = "flex";
+                else card.style.display = "none";
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.2 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
