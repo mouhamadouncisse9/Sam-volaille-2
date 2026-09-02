@@ -13,10 +13,14 @@
         /* ANIMATIONS */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .float-wa { animation: none; }
+        }
 
         /* NAVBAR */
         nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #eaeaea; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 12px 0; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; gap: 15px; }
         
         /* LOGO IMAGE */
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -28,10 +32,10 @@
         .nav-links a { text-decoration: none; color: #333; font-weight: 600; font-size: 0.95rem; position: relative; transition: color 0.3s; }
         .nav-links a::after { content: ""; position: absolute; bottom: -6px; left: 0; width: 0; height: 3px; background: var(--vert-moyen); border-radius: 3px; transition: width 0.3s; }
         .nav-links a:hover { color: var(--vert-moyen); } .nav-links a:hover::after { width: 100%; }
-        .cta-nav { background: var(--vert-fonce); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(27,94,32,0.2); }
-        .cta-nav:hover { background: var(--jaune); color: var(--noir); box-shadow: 0 4px 15px rgba(251,192,45,0.4); }
+        .cta-nav { background: var(--vert-fonce); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(27,94,32,0.2); white-space: nowrap; }
+        .cta-nav:hover { background: var(--jaune); color: var(--noir); box-shadow: 0 4px 15px rgba(251,192,45,0.4); transform: translateY(-2px); }
         .hamburger { display: none; flex-direction: column; cursor: pointer; }
-        .hamburger span { width: 25px; height: 3px; background: var(--vert-fonce); margin: 4px 0; transition: 0.4s; }
+        .hamburger span { width: 25px; height: 3px; background: var(--vert-fonce); margin: 4px 0; transition: 0.4s; border-radius: 2px; }
 
         /* SECTIONS */
         section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
@@ -39,7 +43,7 @@
         .sec-tag { display: inline-block; background: var(--vert-moyen); color: white; padding: 6px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
         h2 { font-size: 2.6rem; font-weight: 800; color: var(--vert-fonce); }
         .underline { width: 70px; height: 4px; background: var(--jaune); margin: 15px auto; border-radius: 2px; }
-        .subtitle-sec { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem; }
+        .subtitle-sec { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem; max-width: 650px; margin-left: auto; margin-right: auto; }
 
         /* FILTRES */
         .filter-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 50px; }
@@ -48,16 +52,16 @@
 
         /* CARTES PRODUITS */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: all 0.4s ease; position: relative; border: 1px solid #f0f0f0; display: flex; flex-direction: column; }
+        .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease; position: relative; border: 1px solid #f0f0f0; display: flex; flex-direction: column; }
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-color: #e0e0e0; }
         .card-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s; }
-        .product-card:hover .card-img { transform: scale(1.1); }
+        .product-card:hover .card-img { transform: scale(1.08); }
         .card-badge { position: absolute; top: 15px; left: 15px; background: white; color: var(--vert-fonce); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; }
         .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
         .card-cat { font-size: 0.8rem; font-weight: 700; color: var(--vert-moyen); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: #333; }
         .card-price { font-size: 1.8rem; font-weight: 800; color: var(--vert-fonce); margin-bottom: 20px; margin-top: auto; }
-        .card-btn { display: block; background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; position: relative; overflow: hidden; transition: all 0.3s; }
+        .card-btn { display: block; background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
         .card-btn::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
         .card-btn:hover::before { left: 100%; } .card-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(37,211,102,0.3); }
 
@@ -70,6 +74,13 @@
         td { font-size: 1rem; transition: background 0.2s; }
         tr:hover td { background: #f8faf8; }
         td:nth-child(2) { font-weight: 700; color: var(--vert-fonce); }
+
+        /* BLOC CAPACITÉ SUR MESURE */
+        .custom-capacity { background: linear-gradient(135deg, var(--vert-fonce), var(--vert-moyen)); border-radius: 20px; padding: 40px; text-align: center; color: white; margin-bottom: 40px; }
+        .custom-capacity h3 { font-size: 1.5rem; margin-bottom: 12px; }
+        .custom-capacity p { color: #e8f5e9; max-width: 600px; margin: 0 auto 25px; }
+        .custom-capacity .btn-wa { display: inline-block; background: #25D366; color: white; padding: 14px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s; }
+        .custom-capacity .btn-wa:hover { transform: translateY(-3px); background: #128C7E; box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
 
         /* FOOTER */
         footer { background: #0d1117; color: #ddd; padding: 70px 20px 30px; position: relative; }
@@ -97,14 +108,22 @@
         .float-wa:hover { transform: scale(1.1) rotate(10deg); }
 
         @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 70px; left: 0; width: 100%; height: auto; background: white; flex-direction: column; gap: 15px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.3s; }
+            .nav-links { position: fixed; top: 70px; left: 0; width: 100%; height: auto; background: white; flex-direction: column; gap: 15px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.3s; max-height: calc(100vh - 70px); overflow-y: auto; }
             .nav-links.active { opacity: 1; pointer-events: all; transform: translateY(0); }
-            .nav-links a { font-size: 1.2rem; }
+            .nav-links a { font-size: 1.2rem; display: block; }
             .hamburger { display: flex; z-index: 1001; }
+            .cta-nav { display: none; }
             section { padding: 60px 15px; }
             h2 { font-size: 2.2rem; }
-            .logo-img { height: 45px; }
-            .logo-text { font-size: 1.3rem; }
+            .logo-img { height: 42px; }
+            .logo-text { font-size: 1.15rem; }
+            .nav-container { padding: 0 15px; }
+            .price-table-container { padding: 20px 15px; }
+            .custom-capacity { padding: 30px 20px; }
+        }
+
+        @media (max-width: 400px) {
+            .logo-text { display: none; }
         }
     </style>
 </head>
@@ -122,6 +141,8 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="#produits">Nos couveuses</a></li>
                 <li><a href="#prix">Prix</a></li>
+                <!-- 🔗 URL TikTok à remplacer par l'URL officielle du compte SAM VOLAILLE -->
+                <li><a href="https://www.tiktok.com/@samvolaille" target="_blank" rel="noopener">Nos réalisations</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
             <a href="https://wa.me/22373020233" target="_blank" class="cta-nav">WhatsApp</a>
@@ -134,7 +155,7 @@
             <div class="sec-tag">Catalogue complet</div>
             <h2>Nos couveuses</h2>
             <div class="underline"></div>
-            <p class="subtitle-sec">Filtrez par type pour trouver le modèle adapté à votre élevage</p>
+            <p class="subtitle-sec">Filtrez par type pour trouver le modèle adapté à votre élevage. Capacités sur mesure jusqu'à 5 000 œufs et plus, sur commande.</p>
         </div>
         
         <div class="filter-buttons reveal">
@@ -240,6 +261,13 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- BLOC CAPACITÉ SUR MESURE : couvre les besoins au-delà de 2 000 œufs -->
+        <div class="custom-capacity reveal">
+            <h3>Besoin d'une capacité supérieure ?</h3>
+            <p>Nous fabriquons aussi des couveuses jusqu'à 5 000 œufs et plus, sur commande, adaptées à votre volume de production. Contactez-nous pour un devis personnalisé.</p>
+            <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20souhaite%20un%20devis%20pour%20une%20couveuse%20de%20grande%20capacit%C3%A9%20(plus%20de%202%20000%20%C5%93ufs)." target="_blank" class="btn-wa">Demander un devis sur WhatsApp</a>
+        </div>
     </section>
 
     <!-- FOOTER -->
@@ -249,9 +277,10 @@
                 <h3>Qui sommes-nous ?</h3>
                 <p>SAM VOLAILLE est une entreprise malienne spécialisée dans la conception et la vente de couveuses d'œufs modernes. Basés à Bamako, nous accompagnons les éleveurs locaux.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-icon">f</a>
-                    <a href="#" class="social-icon">📷</a>
-                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon" aria-label="Facebook">f</a>
+                    <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+                    <!-- 🔗 URL TikTok à remplacer -->
+                    <a href="https://www.tiktok.com/@samvolaille" target="_blank" rel="noopener" class="social-icon" aria-label="TikTok">🎵</a>
                 </div>
             </div>
 
@@ -261,6 +290,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="#produits">Catalogue couveuses</a></li>
                     <li><a href="#prix">Tarifs et prix</a></li>
+                    <li><a href="https://www.tiktok.com/@samvolaille" target="_blank" rel="noopener">Nos réalisations (TikTok)</a></li>
                 </ul>
             </div>
 
@@ -278,7 +308,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/22373020233" target="_blank" class="float-wa">💬</a>
+    <a href="https://wa.me/22373020233" target="_blank" class="float-wa" aria-label="Contacter sur WhatsApp">💬</a>
 
     <script>
         function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
@@ -297,6 +327,12 @@
                 entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
             }, { threshold: 0.2 });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            document.querySelectorAll('#navLinks a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById("navLinks").classList.remove("active");
+                });
+            });
         });
     </script>
 </body>
