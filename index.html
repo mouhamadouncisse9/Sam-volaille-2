@@ -13,6 +13,10 @@
         /* ANIMATIONS */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .float-wa { animation: none; }
+        }
 
         /* ================= NAVBAR ULTRA MODERNE ================= */
         nav {
@@ -22,7 +26,7 @@
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             padding: 12px 0; transition: box-shadow 0.3s;
         }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; gap: 15px; }
         
         /* LOGO IMAGE */
         .logo {
@@ -51,21 +55,21 @@
         .nav-links a:hover { color: var(--vert-moyen); }
         .nav-links a:hover::after { width: 100%; }
 
-        .cta-nav { background: var(--vert-fonce); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(27,94,32,0.2); }
-        .cta-nav:hover { background: var(--jaune); color: var(--noir); box-shadow: 0 4px 15px rgba(251,192,45,0.4); }
+        .cta-nav { background: var(--vert-fonce); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; box-shadow: 0 4px 10px rgba(27,94,32,0.2); white-space: nowrap; }
+        .cta-nav:hover { background: var(--jaune); color: var(--noir); box-shadow: 0 4px 15px rgba(251,192,45,0.4); transform: translateY(-2px); }
 
         .hamburger { display: none; flex-direction: column; cursor: pointer; }
-        .hamburger span { width: 25px; height: 3px; background: var(--vert-fonce); margin: 4px 0; transition: 0.4s; }
+        .hamburger span { width: 25px; height: 3px; background: var(--vert-fonce); margin: 4px 0; transition: 0.4s; border-radius: 2px; }
 
         /* ================= HERO ================= */
         #accueil { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, var(--vert-fonce), var(--vert-moyen)); color: white; padding: 120px 20px 80px; position: relative; overflow: hidden; }
-        #accueil::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,160L48,160C96,160,192,160,288,165.3C384,171,480,181,576,186.7C672,192,768,192,864,181.3C960,171,1056,149,1152,144C1248,139,1344,149,1392,154.7L1440,160L1440,320L0,320Z"></path></svg>') no-repeat bottom; }
+        #accueil::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,160L48,160C96,160,192,160,288,165.3C384,171,480,181,576,186.7C672,192,768,192,864,181.3C960,171,1056,149,1152,144C1248,139,1344,149,1392,154.7L1440,160L1440,320L0,320Z"></path></svg>') no-repeat bottom; background-size: cover; }
         .hero-content { max-width: 800px; z-index: 2; }
         
         .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 25px; }
         h1 { font-size: 4rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 20px; }
-        .hero-sub { font-size: 1.6rem; font-weight: 300; margin-bottom: 15px; color: #e8f5e9; }
-        .hero-text { font-size: 1.1rem; margin-bottom: 30px; color: #c8e6c9; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero-sub { font-size: 1.7rem; font-weight: 700; margin-bottom: 18px; color: var(--jaune); }
+        .hero-text { font-size: 1.1rem; margin-bottom: 30px; color: #e0f2e1; max-width: 620px; margin-left: auto; margin-right: auto; }
         .hero-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         
         .btn { display: inline-block; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.3s; }
@@ -76,7 +80,7 @@
 
         /* VIDEO */
         .video-box { margin-top: 50px; width: 100%; max-width: 800px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 3px solid rgba(255,255,255,0.2); z-index: 2; }
-        .video-box iframe { width: 100%; height: 400px; border: none; display: block; }
+        .video-box video { width: 100%; height: 400px; border: none; display: block; background: #000; }
 
         /* ================= SECTION PRODUITS VEDETTES ================= */
         section { padding: 90px 20px; max-width: 1200px; margin: 0 auto; }
@@ -84,7 +88,7 @@
         .sec-tag { display: inline-block; background: var(--vert-moyen); color: white; padding: 6px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
         h2 { font-size: 2.6rem; font-weight: 800; color: var(--vert-fonce); }
         .underline { width: 70px; height: 4px; background: var(--jaune); margin: 15px auto; border-radius: 2px; }
-        .subtitle-sec { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem; }
+        .subtitle-sec { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem; max-width: 650px; margin-left: auto; margin-right: auto; }
 
         /* ============ CARTES PRODUITS PREMIUM ============ */
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
@@ -94,7 +98,7 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
             position: relative;
             border: 1px solid #f0f0f0;
             display: flex; flex-direction: column;
@@ -102,7 +106,7 @@
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-color: #e0e0e0; }
         
         .card-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s; }
-        .product-card:hover .card-img { transform: scale(1.1); }
+        .product-card:hover .card-img { transform: scale(1.08); }
         
         .card-badge { position: absolute; top: 15px; left: 15px; background: white; color: var(--vert-fonce); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; }
         
@@ -111,7 +115,7 @@
         .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: #333; }
         .card-price { font-size: 1.8rem; font-weight: 800; color: var(--vert-fonce); margin-bottom: 20px; margin-top: auto; }
         
-        .card-btn { display: block; background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; position: relative; overflow: hidden; transition: all 0.3s; }
+        .card-btn { display: block; background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
         .card-btn::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
         .card-btn:hover::before { left: 100%; }
         .card-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(37,211,102,0.3); }
@@ -119,7 +123,7 @@
         /* ================= CTA ================= */
         .cta-section { background: linear-gradient(135deg, var(--vert-fonce), var(--vert-moyen)); border-radius: 25px; padding: 70px; text-align: center; color: white; margin: 40px 20px; }
         .cta-section h2 { color: white; margin-bottom: 15px; }
-        .cta-section p { color: #e8f5e9; font-size: 1.2rem; margin-bottom: 30px; }
+        .cta-section p { color: #e8f5e9; font-size: 1.2rem; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto; }
 
         /* ============ FOOTER PROFESSIONNEL ============ */
         footer { background: #0d1117; color: #ddd; padding: 70px 20px 30px; position: relative; }
@@ -153,16 +157,26 @@
         .float-wa:hover { transform: scale(1.1) rotate(10deg); }
 
         @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 70px; left: 0; width: 100%; height: auto; background: white; flex-direction: column; gap: 15px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.3s; }
+            .nav-links { position: fixed; top: 70px; left: 0; width: 100%; height: auto; background: white; flex-direction: column; gap: 15px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.3s; max-height: calc(100vh - 70px); overflow-y: auto; }
             .nav-links.active { opacity: 1; pointer-events: all; transform: translateY(0); }
-            .nav-links a { font-size: 1.2rem; }
+            .nav-links a { font-size: 1.2rem; display: block; }
             .hamburger { display: flex; z-index: 1001; }
-            h1 { font-size: 2.8rem; }
-            .video-box iframe { height: 250px; }
+            .cta-nav { display: none; }
+            h1 { font-size: 2.4rem; letter-spacing: 1.5px; }
+            .hero-sub { font-size: 1.3rem; }
+            .hero-text { font-size: 1rem; }
+            .btn { padding: 13px 24px; font-size: 0.95rem; }
+            .video-box video { height: 220px; }
             section { padding: 60px 15px; }
-            .cta-section { padding: 40px 15px; }
-            .logo-img { height: 45px; }
-            .logo-text { font-size: 1.3rem; }
+            .cta-section { padding: 40px 20px; }
+            .cta-section h2 { font-size: 1.8rem; }
+            .logo-img { height: 42px; }
+            .logo-text { font-size: 1.15rem; }
+            .nav-container { padding: 0 15px; }
+        }
+
+        @media (max-width: 400px) {
+            .logo-text { display: none; }
         }
     </style>
 </head>
@@ -182,6 +196,8 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="produits.html">Nos couveuses</a></li>
+                <!-- 🔗 URL TikTok à remplacer par l'URL officielle du compte SAM VOLAILLE -->
+                <li><a href="https://www.tiktok.com/@samvolaille" target="_blank" rel="noopener">Nos réalisations</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
@@ -196,8 +212,8 @@
         <div class="hero-content reveal">
             <div class="hero-tag">🐔 Fabricant local à Bamako</div>
             <h1>SAM VOLAILLE</h1>
-            <p class="hero-sub">Des couveuses fiables pour développer votre élevage.</p>
-            <p class="hero-text">Découvrez nos couveuses manuelles, semi-automatiques et automatiques, disponibles en plusieurs capacités de 150 à 2 000 œufs.</p>
+            <p class="hero-sub">La performance au service de votre élevage.</p>
+            <p class="hero-text">Des couveuses fiables et performantes, conçues pour répondre à chaque besoin, jusqu'à 5 000 œufs et plus sur commande. Qualité, capacité sur mesure et prix avantageux pour vous accompagner dans le développement de votre activité.</p>
             <div class="hero-buttons">
                 <a href="produits.html" class="btn btn-primary">Voir nos couveuses</a>
                 <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20souhaite%20avoir%20plus%20d%27informations" target="_blank" class="btn btn-wa">Commander sur WhatsApp</a>
@@ -217,7 +233,7 @@
             <div class="sec-tag">Nos modèles</div>
             <h2>Couveuses populaires</h2>
             <div class="underline"></div>
-            <p class="subtitle-sec">Trois modèles phares pour démarrer ou agrandir votre élevage</p>
+            <p class="subtitle-sec">Trois modèles pour démarrer ou agrandir votre élevage, avec des capacités adaptées à vos besoins, jusqu'à 5 000 œufs et plus sur commande.</p>
         </div>
         
         <div class="cards-grid">
@@ -262,8 +278,8 @@
     <!-- CTA -->
     <div class="cta-section reveal">
         <h2>Prêt à développer votre élevage ?</h2>
-        <p>Découvrez notre gamme complète avec tous les prix adaptés à votre budget.</p>
-        <a href="produits.html" class="btn btn-primary" style="font-size:1.3rem; padding:20px 50px;">Voir tout le catalogue</a>
+        <p>Découvrez notre gamme complète avec tous les prix adaptés à votre budget, et nos capacités personnalisées jusqu'à 5 000 œufs et plus sur commande.</p>
+        <a href="produits.html" class="btn btn-primary" style="font-size:1.2rem; padding:18px 45px;">Voir tout le catalogue</a>
     </div>
 
     <!-- FOOTER PROFESSIONNEL -->
@@ -273,9 +289,10 @@
                 <h3>Qui sommes-nous ?</h3>
                 <p>SAM VOLAILLE est une entreprise malienne spécialisée dans la conception, la fabrication et la vente de couveuses d'œufs modernes. Basés à Bamako, nous accompagnons les éleveurs locaux avec des solutions fiables et abordables.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-icon">f</a>
-                    <a href="#" class="social-icon">📷</a>
-                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon" aria-label="Facebook">f</a>
+                    <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+                    <!-- 🔗 URL TikTok à remplacer -->
+                    <a href="https://www.tiktok.com/@samvolaille" target="_blank" rel="noopener" class="social-icon" aria-label="TikTok">🎵</a>
                 </div>
             </div>
 
@@ -285,6 +302,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="produits.html">Catalogue couveuses</a></li>
                     <li><a href="produits.html#prix">Tarifs et prix</a></li>
+                    <li><a href="https://www.tiktok.com/@samvolaille" target="_blank" rel="noopener">Nos réalisations (TikTok)</a></li>
                 </ul>
             </div>
 
@@ -302,7 +320,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/22373020233" target="_blank" class="float-wa">💬</a>
+    <a href="https://wa.me/22373020233" target="_blank" class="float-wa" aria-label="Contacter sur WhatsApp">💬</a>
 
     <script>
         function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
@@ -311,6 +329,13 @@
                 entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
             }, { threshold: 0.2 });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Ferme le menu mobile après un clic sur un lien
+            document.querySelectorAll('#navLinks a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById("navLinks").classList.remove("active");
+                });
+            });
         });
     </script>
 </body>
