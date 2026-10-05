@@ -4,298 +4,594 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAM VOLAILLE – Couveuses d'œufs à Bamako, Mali</title>
+    <meta name="description" content="SAM VOLAILLE, fabricant local de couveuses d'œufs à Bamako : manuelles, semi-automatiques et automatiques, jusqu'à 5 000 œufs et plus sur commande.">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        :root { --vert-fonce: #1b5e20; --vert-moyen: #2e7d32; --vert-clair: #66bb6a; --jaune: #fbc02d; --gris-fond: #f8faf8; --carte-fond: #fffefb; --blanc: #ffffff; --noir: #1a1a1a; --ease: cubic-bezier(0.22, 1, 0.36, 1); }
-        body { background: var(--gris-fond); color: #333; line-height: 1.7; overflow-x: hidden; }
-        html { scroll-behavior: smooth; }
-
-        /* ANIMATIONS */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s var(--ease); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        @media (prefers-reduced-motion: reduce) {
-            .reveal { opacity: 1; transform: none; transition: none; }
-            .float-wa { animation: none; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
+        :root {
+            --vert-fonce:#1b5e20; --vert-moyen:#2e7d32; --vert-clair:#66bb6a;
+            --jaune:#fbc02d; --gris-fond:#f6f9f6; --blanc:#fff; --noir:#1a1a1a;
+            --ease:cubic-bezier(.22,1,.36,1);
         }
+        body { background:var(--gris-fond); color:#333; line-height:1.7; overflow-x:hidden; }
+        html { scroll-behavior:smooth; }
 
-        /* ================= NAVBAR ULTRA MODERNE ================= */
+        .reveal { opacity:0; transform:translateY(40px); transition:all .8s var(--ease); }
+        .reveal.active { opacity:1; transform:translateY(0); }
+
+        /* ================= NAVBAR ================= */
         nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #eaeaea;
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            padding: 12px 0; transition: box-shadow 0.3s;
+            background:rgba(255,255,255,.82);
+            -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+            border-bottom:1px solid rgba(255,255,255,.6);
+            position:fixed; top:0; left:0; width:100%; z-index:1000;
+            padding:14px 0; transition:padding .3s, box-shadow .3s, background .3s;
         }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; gap: 15px; }
-        
-        /* LOGO IMAGE */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .logo-img {
-            height: 55px; /* Ajustez la hauteur selon votre logo */
-            width: auto;
-            display: block;
-        }
-        .logo-text {
-            font-size: 1.6rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-            color: var(--vert-fonce);
-            line-height: 1.2;
-        }
-        .logo-sam { color: var(--jaune); }
-        
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { text-decoration: none; color: #333; font-weight: 600; font-size: 0.95rem; position: relative; transition: color 0.3s; }
-        .nav-links a::after { content: ""; position: absolute; bottom: -6px; left: 0; width: 0; height: 3px; background: var(--vert-moyen); border-radius: 3px; transition: width 0.3s; }
-        .nav-links a:hover { color: var(--vert-moyen); }
-        .nav-links a:hover::after { width: 100%; }
-
-        .cta-nav { background: var(--vert-fonce); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.3s var(--ease); box-shadow: 0 4px 10px rgba(27,94,32,0.2); white-space: nowrap; }
-        .cta-nav:hover { background: var(--jaune); color: var(--noir); box-shadow: 0 4px 15px rgba(251,192,45,0.4); transform: translateY(-2px); }
-
-        .hamburger { display: none; flex-direction: column; cursor: pointer; }
-        .hamburger span { width: 25px; height: 3px; background: var(--vert-fonce); margin: 4px 0; transition: 0.4s; border-radius: 2px; }
+        nav.scrolled { padding:8px 0; background:rgba(255,255,255,.95); box-shadow:0 8px 30px rgba(27,94,32,.12); }
+        .nav-container { max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; gap:15px; }
+        .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+        .logo-img { height:55px; width:auto; display:block; transition:height .3s; }
+        nav.scrolled .logo-img { height:46px; }
+        .logo-text { font-size:1.6rem; font-weight:900; letter-spacing:1px; color:var(--vert-fonce); line-height:1.2; }
+        .logo-sam { color:var(--jaune); }
+        .nav-links { display:flex; gap:25px; list-style:none; }
+        .nav-links a { text-decoration:none; color:#333; font-weight:600; font-size:.95rem; position:relative; transition:color .3s; }
+        .nav-links a::after { content:""; position:absolute; bottom:-6px; left:0; width:0; height:3px; background:var(--vert-moyen); border-radius:3px; transition:width .3s; }
+        .nav-links a:hover { color:var(--vert-moyen); }
+        .nav-links a:hover::after { width:100%; }
+        .cta-nav { background:var(--vert-fonce); color:white; padding:10px 24px; border-radius:50px; text-decoration:none; font-weight:700; font-size:.9rem; transition:all .3s var(--ease); box-shadow:0 4px 10px rgba(27,94,32,.2); white-space:nowrap; }
+        .cta-nav:hover { background:var(--jaune); color:var(--noir); transform:translateY(-2px); }
+        .hamburger { display:none; flex-direction:column; cursor:pointer; }
+        .hamburger span { width:25px; height:3px; background:var(--vert-fonce); margin:4px 0; transition:.4s; border-radius:2px; }
 
         /* ================= HERO ================= */
-        #accueil { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, var(--vert-fonce), var(--vert-moyen)); color: white; padding: 120px 20px 80px; position: relative; overflow: hidden; }
-        #accueil::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,160L48,160C96,160,192,160,288,165.3C384,171,480,181,576,186.7C672,192,768,192,864,181.3C960,171,1056,149,1152,144C1248,139,1344,149,1392,154.7L1440,160L1440,320L0,320Z"></path></svg>') no-repeat bottom; background-size: cover; }
-        .hero-content { max-width: 800px; z-index: 2; }
-        
-        .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 25px; }
-        h1 { font-size: 4rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 20px; }
-        .hero-sub { font-size: 1.7rem; font-weight: 700; margin-bottom: 18px; color: var(--jaune); }
-        .hero-text { font-size: 1.1rem; margin-bottom: 30px; color: #e0f2e1; max-width: 620px; margin-left: auto; margin-right: auto; }
-        .hero-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        
-        .btn { display: inline-block; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.3s var(--ease); }
-        .btn-primary { background: var(--jaune); color: var(--noir); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        .btn-wa { background: #25D366; color: white; box-shadow: 0 5px 15px rgba(37,211,102,0.3); }
-        .btn-wa:hover { transform: translateY(-3px); background: #128C7E; }
+        .hero {
+            position:relative; overflow:hidden; color:#fff;
+            padding:150px 20px 140px;
+            background:
+                radial-gradient(900px 520px at 88% 8%, rgba(251,192,45,.28), transparent 60%),
+                radial-gradient(700px 500px at 0% 100%, rgba(102,187,106,.30), transparent 60%),
+                linear-gradient(135deg,#0d3511 0%,var(--vert-fonce) 45%,var(--vert-moyen) 100%);
+        }
+        .hero::before {
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.6;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(251,192,45,.35) 0 2px, transparent 3px),
+                radial-gradient(circle at 70% 60%, rgba(255,255,255,.25) 0 2px, transparent 3px),
+                radial-gradient(circle at 45% 85%, rgba(251,192,45,.30) 0 2px, transparent 3px);
+            background-size:120px 120px,160px 160px,200px 200px;
+        }
+        .hero-grid { position:relative; z-index:3; max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.02fr .98fr; gap:55px; align-items:center; }
+        .hero-tag { display:inline-block; background:rgba(255,255,255,.14); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.35); padding:8px 20px; border-radius:50px; font-size:.85rem; letter-spacing:1px; margin-bottom:24px; }
+        h1 { font-size:clamp(2.6rem,6vw,4.4rem); font-weight:900; letter-spacing:3px; line-height:1.05; margin-bottom:18px; }
+        h1 .logo-sam { color:var(--jaune); }
+        .hero-sub { font-size:1.6rem; font-weight:700; margin-bottom:16px; color:var(--jaune); }
+        .hero-text { font-size:1.08rem; margin-bottom:26px; color:#e0f2e1; max-width:560px; }
+        .hero-chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px; }
+        .hero-chip { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); padding:7px 14px; border-radius:30px; font-size:.82rem; font-weight:700; }
+        .hero-buttons { display:flex; gap:15px; flex-wrap:wrap; }
+        .btn { display:inline-block; padding:15px 30px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1rem; transition:all .3s var(--ease); }
+        .btn-primary { background:var(--jaune); color:var(--noir); box-shadow:0 5px 15px rgba(0,0,0,.2); }
+        .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.3); }
+        .btn-wa { background:#25D366; color:white; box-shadow:0 5px 15px rgba(37,211,102,.3); }
+        .btn-wa:hover { transform:translateY(-3px); background:#128C7E; }
 
-        /* VIDEO */
-        .video-box { margin-top: 50px; width: 100%; max-width: 800px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 3px solid rgba(255,255,255,0.2); z-index: 2; }
-        .video-box video { width: 100%; height: 400px; border: none; display: block; background: #000; }
+        .hero-blob { position:absolute; border-radius:50%; filter:blur(70px); opacity:.45; pointer-events:none; animation:drift 14s ease-in-out infinite alternate; z-index:1; }
+        .hero-blob-1 { width:360px; height:360px; background:#fbc02d; top:-80px; right:8%; }
+        .hero-blob-2 { width:320px; height:320px; background:#66bb6a; bottom:-60px; left:-60px; animation-delay:-6s; }
+        .deco { position:absolute; z-index:2; font-size:2.2rem; opacity:.3; pointer-events:none; animation:floaty 6s ease-in-out infinite; }
+        .hero .deco-1 { top:16%; left:5%; }
+        .hero .deco-2 { top:58%; left:46%; animation-delay:-2s; font-size:2.6rem; }
+        .hero .deco-3 { bottom:20%; right:4%; animation-delay:-4s; }
+        @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(40px,-30px) scale(1.12)} }
+        @keyframes floaty { 0%,100%{transform:translateY(0) rotate(-6deg)} 50%{transform:translateY(-16px) rotate(6deg)} }
 
-        /* ================= SECTION PRODUITS VEDETTES ================= */
-        section { padding: 90px 20px; max-width: 1200px; margin: 0 auto; }
-        .sec-title { text-align: center; margin-bottom: 50px; }
-        .sec-tag { display: inline-block; background: var(--vert-moyen); color: white; padding: 6px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        h2 { font-size: 2.6rem; font-weight: 800; color: var(--vert-fonce); }
-        .underline { width: 70px; height: 4px; background: var(--jaune); margin: 15px auto; border-radius: 2px; }
-        .subtitle-sec { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem; max-width: 650px; margin-left: auto; margin-right: auto; }
+        .wave { position:absolute; left:0; bottom:-1px; width:100%; line-height:0; z-index:3; }
+        .wave svg { display:block; width:100%; height:70px; }
 
-        /* ============ CARTES PRODUITS PREMIUM ============ */
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        
+        /* ===== VIDEO ===== */
+        .video-wrap { position:relative; }
+        .video-wrap::before {
+            content:""; position:absolute; inset:-18px; border-radius:36px; z-index:0;
+            background:conic-gradient(from 140deg,var(--jaune),var(--vert-clair),var(--jaune));
+            filter:blur(28px); opacity:.45;
+        }
+        .video-frame {
+            position:relative; z-index:1;
+            border-radius:26px; overflow:hidden;
+            background:rgba(255,255,255,.14);
+            -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+            border:1px solid rgba(255,255,255,.45);
+            box-shadow:0 30px 60px rgba(0,0,0,.40);
+            padding:10px;
+        }
+        .video-bar { display:flex; align-items:center; gap:7px; padding:4px 8px 10px; font-size:.78rem; font-weight:700; letter-spacing:.5px; color:#fff; }
+        .video-bar i { width:10px; height:10px; border-radius:50%; display:inline-block; }
+        .video-bar i:nth-child(1) { background:#ff6b6b; }
+        .video-bar i:nth-child(2) { background:var(--jaune); }
+        .video-bar i:nth-child(3) { background:#69db7c; }
+        .video-bar span { margin-left:auto; opacity:.9; }
+        .video-box { position:relative; border-radius:18px; overflow:hidden; background:#07140a; display:flex; justify-content:center; align-items:center; }
+        .video-box video { display:block; max-width:100%; max-height:70vh; width:auto; height:auto; min-height:200px; background:#07140a; }
+        .video-play {
+            position:absolute; inset:0; z-index:2; border:none; cursor:pointer;
+            display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+            background:linear-gradient(to top,rgba(7,20,10,.65),rgba(7,20,10,.20) 55%,rgba(7,20,10,.45));
+            color:#fff; font-weight:800; font-size:.95rem; letter-spacing:.5px;
+            transition:opacity .4s, visibility .4s;
+        }
+        .video-play.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+        .play-circle {
+            width:84px; height:84px; border-radius:50%;
+            background:var(--jaune); color:var(--noir);
+            display:flex; align-items:center; justify-content:center; font-size:2rem; padding-left:6px;
+            box-shadow:0 0 0 0 rgba(251,192,45,.7);
+            animation:ring 2s infinite; transition:transform .3s var(--ease);
+        }
+        .video-play:hover .play-circle { transform:scale(1.1); }
+        @keyframes ring { 0%{box-shadow:0 0 0 0 rgba(251,192,45,.65)} 70%{box-shadow:0 0 0 24px rgba(251,192,45,0)} 100%{box-shadow:0 0 0 0 rgba(251,192,45,0)} }
+        .video-caption { text-align:center; font-size:.82rem; color:#e0f2e1; padding:12px 6px 4px; }
+
+        /* ================= FOND FERME ================= */
+        .farm-bg {
+            position:relative; overflow:hidden;
+            background:
+                radial-gradient(1100px 520px at 8% -8%, rgba(251,192,45,.30), transparent 60%),
+                radial-gradient(900px 520px at 100% 25%, rgba(102,187,106,.32), transparent 60%),
+                radial-gradient(700px 400px at 0% 100%, rgba(251,192,45,.22), transparent 60%),
+                linear-gradient(180deg,#fdf8e6 0%,#eef7ea 60%,var(--gris-fond) 100%);
+        }
+        .farm-bg::before {
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.55;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(251,192,45,.35) 0 2px, transparent 3px),
+                radial-gradient(circle at 70% 60%, rgba(46,125,50,.22) 0 2px, transparent 3px),
+                radial-gradient(circle at 45% 85%, rgba(251,192,45,.30) 0 2px, transparent 3px);
+            background-size:120px 120px,160px 160px,200px 200px;
+        }
+        .farm-bg > section { position:relative; z-index:2; }
+        .blob { position:absolute; border-radius:50%; filter:blur(60px); opacity:.55; pointer-events:none; z-index:1; animation:drift 14s ease-in-out infinite alternate; }
+        .blob-1 { width:340px; height:340px; background:#fbc02d; top:10%; left:-90px; }
+        .blob-2 { width:380px; height:380px; background:#66bb6a; top:45%; right:-110px; animation-delay:-5s; }
+        .blob-3 { width:300px; height:300px; background:#ffe082; bottom:4%; left:30%; animation-delay:-9s; }
+        .farm-bg .deco-a { top:8%; right:7%; }
+        .farm-bg .deco-b { top:44%; left:3%; animation-delay:-2s; font-size:2.8rem; }
+        .farm-bg .deco-c { bottom:8%; right:12%; animation-delay:-4s; }
+
+        section { padding:90px 20px; max-width:1200px; margin:0 auto; }
+        .sec-title { text-align:center; margin-bottom:50px; }
+        .sec-tag { display:inline-block; background:var(--vert-moyen); color:white; padding:6px 15px; border-radius:30px; font-size:.8rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; }
+        h2 { font-size:2.6rem; font-weight:800; color:var(--vert-fonce); }
+        .underline { width:70px; height:4px; background:var(--jaune); margin:15px auto; border-radius:2px; }
+        .subtitle-sec { text-align:center; color:#666; margin:0 auto 10px; font-size:1.1rem; max-width:650px; }
+
+        /* ===== CARTES PRODUITS : VERRE TRANSPARENT (identiques à la page catalogue) ===== */
+        .cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(285px,1fr)); gap:30px; }
         .product-card {
-            background: var(--carte-fond);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
-            position: relative;
-            border: 1px solid #f0f0f0;
-            display: flex; flex-direction: column;
+            position:relative; display:flex; perspective:1000px;
+            --accent:var(--vert-moyen); --accent-soft:rgba(46,125,50,.14);
         }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-color: #e0e0e0; }
-        
-        .card-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.6s var(--ease); }
-        .product-card:hover .card-img { transform: scale(1.08); }
-        
-        .card-badge { position: absolute; top: 15px; left: 15px; padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 2; color: white; }
-        .card-badge-manuelle { background: var(--vert-clair); }
-        .card-badge-semi { background: var(--jaune); color: var(--noir); }
-        .card-badge-auto { background: var(--vert-fonce); }
-        
-        .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-cat { font-size: 0.8rem; font-weight: 700; color: var(--vert-moyen); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: #333; }
-        .card-price { font-size: 1.8rem; font-weight: 800; color: var(--vert-fonce); margin-bottom: 20px; margin-top: auto; }
-        
-        .card-btn { display: block; background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; position: relative; overflow: hidden; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
-        .card-btn::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
-        .card-btn:hover::before { left: 100%; }
-        .card-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(37,211,102,0.3); }
+        .product-card[data-category="manuelle"] { --accent:#43a047; --accent-soft:rgba(102,187,106,.20); }
+        .product-card[data-category="semi-auto"] { --accent:#f9a825; --accent-soft:rgba(251,192,45,.24); }
+        .product-card[data-category="auto"] { --accent:#1b5e20; --accent-soft:rgba(27,94,32,.14); }
 
-        /* ================= CTA ================= */
-        .cta-section { background: linear-gradient(135deg, var(--vert-fonce), var(--vert-moyen)); border-radius: 25px; padding: 70px; text-align: center; color: white; margin: 40px 20px; }
-        .cta-section h2 { color: white; margin-bottom: 15px; }
-        .cta-section p { color: #e8f5e9; font-size: 1.2rem; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .card-inner {
+            position:relative; display:flex; flex-direction:column; width:100%;
+            border-radius:28px; overflow:hidden;
+            background:linear-gradient(160deg,rgba(255,255,255,.74),rgba(255,255,255,.36));
+            -webkit-backdrop-filter:blur(18px) saturate(150%); backdrop-filter:blur(18px) saturate(150%);
+            border:1px solid rgba(255,255,255,.8);
+            box-shadow:0 14px 40px rgba(27,94,32,.14), inset 0 1px 0 rgba(255,255,255,.95);
+            transform-style:preserve-3d;
+            transform:translateY(var(--ty,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+            transition:transform .25s ease-out, box-shadow .4s var(--ease), border-color .4s;
+            will-change:transform;
+        }
+        @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+            .card-inner { background:rgba(255,255,255,.92); }
+        }
+        .product-card:hover .card-inner { --ty:-8px; border-color:#fff; box-shadow:0 28px 60px rgba(27,94,32,.22), 0 0 0 2px var(--accent-soft), inset 0 1px 0 #fff; }
+        .card-inner::before {
+            content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
+            background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%), rgba(255,255,255,.55), transparent 45%);
+            opacity:0; transition:opacity .3s;
+        }
+        .product-card:hover .card-inner::before { opacity:1; }
 
-        /* ============ FOOTER PROFESSIONNEL ============ */
-        footer { background: #0d1117; color: #ddd; padding: 70px 20px 30px; position: relative; }
-        footer::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--jaune), var(--vert-moyen), var(--jaune)); }
-        
-        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px; }
-        
-        .footer-col h3 { color: white; font-size: 1.3rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
-        .footer-col h3::after { content: ""; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--jaune); border-radius: 2px; }
-        
-        .footer-about p { color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px; }
-        .footer-socials { display: flex; gap: 15px; }
-        .social-icon { width: 40px; height: 40px; background: #1f2933; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.2rem; transition: all 0.3s; }
-        .social-icon:hover { background: var(--jaune); color: #333; transform: translateY(-3px); }
-        
-        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-        .footer-links a { color: #aaa; text-decoration: none; transition: all 0.3s; display: flex; align-items: center; gap: 10px; }
-        .footer-links a:hover { color: var(--jaune); transform: translateX(8px); }
-        .footer-links a::before { content: "→"; color: var(--vert-moyen); font-size: 0.8rem; }
-        
-        .footer-contact p { color: #aaa; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .footer-contact i { color: var(--jaune); font-style: normal; }
-        
-        .footer-bottom { text-align: center; border-top: 1px solid #333; padding-top: 25px; }
-        .footer-bottom p { color: #888; font-size: 0.9rem; }
-        .footer-bottom a { color: var(--jaune); text-decoration: none; }
+        .card-image-wrap { height:235px; position:relative; overflow:hidden; background:linear-gradient(135deg,#eef7ee,#fff); clip-path:ellipse(78% 100% at 50% 0%); }
+        .card-image-wrap::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(to top,rgba(0,0,0,.20),transparent 55%); }
+        .card-img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .8s var(--ease); }
+        .product-card:hover .card-img { transform:scale(1.09); }
 
-        /* WHATSAPP FLOTTANT */
-        .float-wa { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; color: white; box-shadow: 0 8px 20px rgba(37,211,102,0.4); z-index: 999; transition: transform 0.3s; animation: pulse 2s infinite; text-decoration: none; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
-        .float-wa:hover { transform: scale(1.1) rotate(10deg); }
+        .card-badge { position:absolute; top:16px; left:16px; z-index:3; padding:7px 14px; border-radius:30px; font-size:.74rem; font-weight:800; letter-spacing:.4px; box-shadow:0 6px 16px rgba(0,0,0,.18); color:white; -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); }
+        .card-badge-manuelle { background:var(--vert-clair); }
+        .card-badge-semi { background:var(--jaune); color:var(--noir); }
+        .card-badge-auto { background:var(--vert-fonce); }
+        .card-number { position:absolute; right:15px; top:15px; z-index:3; width:35px; height:35px; border-radius:50%; background:rgba(255,255,255,.85); color:var(--vert-fonce); display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:800; box-shadow:0 5px 15px rgba(0,0,0,.12); }
 
-        @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 70px; left: 0; width: 100%; height: auto; background: white; flex-direction: column; gap: 15px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.3s; max-height: calc(100vh - 70px); overflow-y: auto; }
-            .nav-links.active { opacity: 1; pointer-events: all; transform: translateY(0); }
-            .nav-links a { font-size: 1.2rem; display: block; }
-            .hamburger { display: flex; z-index: 1001; }
-            .cta-nav { display: none; }
-            h1 { font-size: 2.4rem; letter-spacing: 1.5px; }
-            .hero-sub { font-size: 1.3rem; }
-            .hero-text { font-size: 1rem; }
-            .btn { padding: 13px 24px; font-size: 0.95rem; }
-            .video-box video { height: 220px; }
-            section { padding: 60px 15px; }
-            .cta-section { padding: 40px 20px; }
-            .cta-section h2 { font-size: 1.8rem; }
-            .logo-img { height: 42px; }
-            .logo-text { font-size: 1.15rem; }
-            .nav-container { padding: 0 15px; }
+        .card-body { position:relative; padding:26px 24px 24px; display:flex; flex-direction:column; flex-grow:1; }
+        .egg-badge {
+            position:absolute; top:-46px; right:20px; z-index:6; width:78px; height:94px;
+            border-radius:50% 50% 50% 50% / 62% 62% 38% 38%;
+            background:linear-gradient(150deg,#fff 0%,#fff3c4 100%);
+            border:2px solid rgba(255,255,255,.9);
+            box-shadow:0 12px 24px rgba(0,0,0,.18), inset 0 -6px 12px rgba(251,192,45,.25);
+            display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; line-height:1.05;
+            animation:bob 4.5s ease-in-out infinite;
+        }
+        .egg-badge strong { font-size:1.25rem; font-weight:900; color:var(--vert-fonce); }
+        .egg-badge span { font-size:.62rem; font-weight:800; color:#8d6e00; text-transform:uppercase; letter-spacing:.5px; margin-top:3px; }
+        @keyframes bob { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-7px) rotate(4deg)} }
+
+        .card-cat { font-size:.72rem; font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:7px; padding-right:90px; }
+        .card-title { font-size:1.28rem; font-weight:800; margin-bottom:14px; color:#1f2a1f; padding-right:90px; line-height:1.3; }
+        .card-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+        .chip { font-size:.74rem; font-weight:700; color:#2f3d2f; background:var(--accent-soft); border:1px solid rgba(255,255,255,.7); padding:5px 11px; border-radius:30px; }
+        .cap-label { display:flex; justify-content:space-between; font-size:.72rem; font-weight:700; color:#6b756b; margin-bottom:5px; text-transform:uppercase; letter-spacing:.6px; }
+        .cap-bar { height:8px; border-radius:20px; background:rgba(27,94,32,.10); overflow:hidden; margin-bottom:20px; }
+        .cap-bar span { display:block; height:100%; width:0; border-radius:20px; background:linear-gradient(90deg,var(--jaune),var(--vert-clair)); transition:width 1.2s var(--ease) .3s; }
+        .reveal.active .cap-bar span { width:var(--w,50%); }
+        .card-price-row { display:flex; align-items:baseline; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+        .card-price-label { font-size:.76rem; color:#6f776f; font-weight:600; }
+        .card-price { font-size:1.7rem; font-weight:900; color:var(--vert-fonce); line-height:1.1; }
+        .card-price small { font-size:.8rem; font-weight:800; color:#5b665b; margin-left:3px; }
+
+        .card-actions { display:flex; gap:10px; margin-top:auto; }
+        .card-btn {
+            flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+            background:linear-gradient(135deg,var(--vert-fonce),var(--vert-moyen)); color:white; text-align:center;
+            padding:14px 15px; border-radius:14px; text-decoration:none; font-weight:800;
+            position:relative; overflow:hidden;
+            transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+            box-shadow:0 8px 18px rgba(27,94,32,.25);
+        }
+        .card-btn::before { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent); transition:left .5s; }
+        .card-btn:hover::before { left:100%; }
+        .card-btn:hover { transform:translateY(-2px); box-shadow:0 12px 24px rgba(27,94,32,.36); }
+        .card-wa {
+            width:52px; flex:none; display:flex; align-items:center; justify-content:center;
+            background:linear-gradient(135deg,#25D366,#1fb855); border-radius:14px; text-decoration:none; font-size:1.4rem;
+            box-shadow:0 8px 18px rgba(37,211,102,.25); transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+        }
+        .card-wa:hover { transform:translateY(-2px) scale(1.05); box-shadow:0 12px 24px rgba(37,211,102,.38); }
+
+        /* ===== POURQUOI NOUS ===== */
+        .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; }
+        .feature { display:flex; }
+        .feature-inner {
+            width:100%; padding:30px 26px; border-radius:24px; text-align:center;
+            background:linear-gradient(160deg,rgba(255,255,255,.72),rgba(255,255,255,.34));
+            -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+            border:1px solid rgba(255,255,255,.8);
+            box-shadow:0 12px 32px rgba(27,94,32,.10), inset 0 1px 0 rgba(255,255,255,.95);
+            transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+        }
+        .feature-inner:hover { transform:translateY(-8px); box-shadow:0 24px 48px rgba(27,94,32,.18); }
+        .feature-icon { width:68px; height:68px; margin:0 auto 16px; border-radius:50%; background:linear-gradient(145deg,#fff,#fff3c4); display:flex; align-items:center; justify-content:center; font-size:1.9rem; box-shadow:0 10px 20px rgba(251,192,45,.25); }
+        .feature h3 { font-size:1.15rem; color:var(--vert-fonce); margin-bottom:8px; }
+        .feature p { font-size:.93rem; color:#555; line-height:1.6; }
+
+        /* ===== CTA ===== */
+        .cta-wrap { padding:20px 20px 90px; max-width:1200px; margin:0 auto; position:relative; z-index:2; }
+        .cta-section {
+            position:relative; overflow:hidden; border-radius:30px; padding:70px 40px; text-align:center; color:white;
+            background:
+                radial-gradient(500px 300px at 90% 0%, rgba(251,192,45,.35), transparent 60%),
+                linear-gradient(135deg,#0d3511,var(--vert-fonce) 50%,var(--vert-moyen));
+            box-shadow:0 30px 60px rgba(27,94,32,.30);
+        }
+        .cta-section::before { content:"🥚"; position:absolute; font-size:7rem; opacity:.08; left:4%; bottom:-20px; transform:rotate(-15deg); }
+        .cta-section::after { content:"🐣"; position:absolute; font-size:7rem; opacity:.08; right:5%; top:-10px; transform:rotate(12deg); }
+        .cta-section h2 { color:white; margin-bottom:15px; position:relative; z-index:1; }
+        .cta-section p { color:#e8f5e9; font-size:1.15rem; margin:0 auto 30px; max-width:700px; position:relative; z-index:1; }
+        .cta-buttons { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; position:relative; z-index:1; }
+
+        /* ===== FOOTER ===== */
+        footer { background:linear-gradient(180deg,#0e2a12 0%,#08170b 100%); color:#ddd; padding:80px 20px 30px; position:relative; }
+        footer::before { content:""; position:absolute; top:0; left:0; width:100%; height:5px; background:linear-gradient(90deg,var(--jaune),var(--vert-moyen),var(--jaune)); }
+        .footer-grid { max-width:1200px; margin:0 auto 50px; display:grid; grid-template-columns:1.3fr 1fr 1.1fr; gap:45px; }
+        .footer-col h3 { color:white; font-size:1.3rem; margin-bottom:20px; position:relative; padding-bottom:10px; }
+        .footer-col h3::after { content:""; position:absolute; bottom:0; left:0; width:40px; height:3px; background:var(--jaune); border-radius:2px; }
+        .footer-brand { display:flex; align-items:center; gap:10px; font-weight:900; font-size:1.3rem; color:#fff; margin-bottom:14px; letter-spacing:1px; }
+        .footer-about p { color:#b4c2b6; font-size:.95rem; line-height:1.8; margin-bottom:20px; }
+        .footer-socials { display:flex; gap:15px; }
+        .social-icon { width:42px; height:42px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; font-size:1.2rem; transition:all .3s; }
+        .social-icon:hover { background:var(--jaune); color:#333; transform:translateY(-3px); }
+        .footer-links { list-style:none; display:flex; flex-direction:column; gap:12px; }
+        .footer-links a { color:#b4c2b6; text-decoration:none; transition:all .3s; display:flex; align-items:center; gap:10px; }
+        .footer-links a:hover { color:var(--jaune); transform:translateX(8px); }
+        .footer-links a::before { content:"→"; color:var(--vert-clair); font-size:.8rem; }
+        .footer-contact p { color:#b4c2b6; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+        .footer-contact i { color:var(--jaune); font-style:normal; }
+        .footer-wa { display:inline-flex; align-items:center; gap:8px; margin-top:8px; background:#25D366; color:#fff; padding:12px 22px; border-radius:50px; text-decoration:none; font-weight:800; transition:all .3s var(--ease); box-shadow:0 8px 18px rgba(37,211,102,.25); }
+        .footer-wa:hover { transform:translateY(-3px); background:#128C7E; }
+        .footer-bottom { text-align:center; border-top:1px solid rgba(255,255,255,.12); padding-top:25px; }
+        .footer-bottom p { color:#8ea092; font-size:.9rem; }
+
+        .float-wa { position:fixed; bottom:25px; right:25px; width:60px; height:60px; background:#25D366; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:2rem; color:white; box-shadow:0 8px 20px rgba(37,211,102,.4); z-index:999; transition:transform .3s; animation:pulse 2s infinite; text-decoration:none; }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(37,211,102,.7)} 70%{box-shadow:0 0 0 20px rgba(37,211,102,0)} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0)} }
+        .float-wa:hover { transform:scale(1.1) rotate(10deg); }
+
+        @media (prefers-reduced-motion:reduce) {
+            .reveal { opacity:1; transform:none; transition:none; }
+            .float-wa,.blob,.hero-blob,.deco,.egg-badge,.play-circle { animation:none; }
+            .card-inner { transition:none; }
+            .cap-bar span { transition:none; }
         }
 
-        @media (max-width: 400px) {
-            .logo-text { display: none; }
+        @media (max-width:900px) {
+            .hero-grid { grid-template-columns:1fr; gap:45px; text-align:center; }
+            .hero-text { margin-left:auto; margin-right:auto; }
+            .hero-chips,.hero-buttons { justify-content:center; }
+            .footer-grid { grid-template-columns:1fr; }
+        }
+        @media (max-width:768px) {
+            .nav-links { position:fixed; top:70px; left:0; width:100%; height:auto; background:white; flex-direction:column; gap:15px; padding:20px; box-shadow:0 10px 20px rgba(0,0,0,.1); opacity:0; pointer-events:none; transform:translateY(-20px); transition:all .3s; max-height:calc(100vh - 70px); overflow-y:auto; }
+            .nav-links.active { opacity:1; pointer-events:all; transform:translateY(0); }
+            .nav-links a { font-size:1.2rem; display:block; }
+            .hamburger { display:flex; z-index:1001; }
+            .cta-nav { display:none; }
+            .hero { padding:120px 15px 110px; }
+            .hero-sub { font-size:1.3rem; }
+            .hero-text { font-size:1rem; }
+            .btn { padding:13px 24px; font-size:.95rem; }
+            section { padding:60px 15px; }
+            h2 { font-size:2.1rem; }
+            .logo-img { height:42px; }
+            .logo-text { font-size:1.15rem; }
+            .nav-container { padding:0 15px; }
+            .card-image-wrap { height:215px; }
+            .cta-section { padding:45px 20px; }
+            .cta-section h2 { font-size:1.8rem; }
+            .cta-wrap { padding:10px 15px 60px; }
+            .deco { font-size:1.6rem; }
+            .play-circle { width:70px; height:70px; font-size:1.7rem; }
+        }
+        @media (max-width:400px) {
+            .logo-text { display:none; }
+            .cards-grid { grid-template-columns:1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav>
+    <!-- ================= EN-TETE : NAVBAR ================= -->
+    <nav id="mainNav">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <!-- 👇 REMPLACEZ ICI par votre logo image -->
                 <img src="images/logo.png" alt="Logo SAM VOLAILLE" class="logo-img">
-                <!-- Si le logo ne s'affiche pas, gardez aussi le texte en dessous -->
-                <span class="logo-text">
-                    <span class="logo-sam">SAM</span> <span class="logo-text">VOLAILLE</span> 🐣
-                </span>
+                <span class="logo-text"><span class="logo-sam">SAM</span> VOLAILLE 🐣</span>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="produits.html">Nos couveuses</a></li>
-                <!-- 🔗 URL TikTok à remplacer par l'URL officielle du compte SAM VOLAILLE -->
                 <li><a href="https://www.tiktok.com/@moustaphesam1" target="_blank" rel="noopener">Nos réalisations</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </div>
-            <a href="produits.html" class="cta-nav">Voir les prix</a>
+            <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+            <a href="produits.html#prix" class="cta-nav">Voir les prix</a>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section id="accueil">
-        <div class="hero-content reveal">
-            <div class="hero-tag">🐔 Fabricant local à Bamako</div>
-            <h1>SAM VOLAILLE</h1>
-            <p class="hero-sub">La performance au service de votre élevage.</p>
-            <p class="hero-text">Des couveuses fiables et performantes, conçues pour répondre à chaque besoin, jusqu'à 5 000 œufs et plus sur commande. Qualité, capacité sur mesure et prix avantageux pour vous accompagner dans le développement de votre activité.</p>
-            <div class="hero-buttons">
-                <a href="produits.html" class="btn btn-primary">Voir nos couveuses</a>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20souhaite%20avoir%20plus%20d%27informations" target="_blank" class="btn btn-wa">Commander sur WhatsApp</a>
-            </div>
-        </div>
-        <div class="video-box reveal">
-            <video controls width="100%">
-                <source src="videos/presentation.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas la vidéo.
-            </video>
-        </div>
-    </section>
+    <!-- ================= HERO ================= -->
+    <header class="hero" id="accueil">
+        <span class="hero-blob hero-blob-1"></span>
+        <span class="hero-blob hero-blob-2"></span>
+        <span class="deco deco-1" aria-hidden="true">🌾</span>
+        <span class="deco deco-2" aria-hidden="true">🥚</span>
+        <span class="deco deco-3" aria-hidden="true">🐥</span>
 
-    <!-- PRODUITS VEDETTES -->
-    <section id="vedettes">
-        <div class="sec-title reveal">
-            <div class="sec-tag">Nos modèles</div>
-            <h2>Couveuses populaires</h2>
-            <div class="underline"></div>
-            <p class="subtitle-sec">Trois modèles pour démarrer ou agrandir votre élevage, avec des capacités adaptées à vos besoins, jusqu'à 5 000 œufs et plus sur commande.</p>
-        </div>
-        
-        <div class="cards-grid">
-            <!-- MODELE 1 -->
-            <div class="product-card reveal">
-                <span class="card-badge card-badge-manuelle">Manuelle</span>
-                <img class="card-img" src="images/3_400.jpeg" alt="Couveuse manuelle">
-                <div class="card-body">
-                    <span class="card-cat">Manuelle</span>
-                    <h3 class="card-title">Modèle Compact</h3>
-                    <p class="card-price">À partir de 90 000 FCFA</p>
-                    <a href="produits.html" class="card-btn">Voir le modèle</a>
+        <div class="hero-grid">
+            <div class="hero-content reveal">
+                <div class="hero-tag">🐔 Fabricant local à Bamako</div>
+                <h1><span class="logo-sam">SAM</span> VOLAILLE</h1>
+                <p class="hero-sub">La performance au service de votre élevage.</p>
+                <p class="hero-text">Des couveuses fiables et performantes, conçues pour répondre à chaque besoin, jusqu'à 5 000 œufs et plus sur commande. Qualité, capacité sur mesure et prix avantageux pour vous accompagner dans le développement de votre activité.</p>
+                <div class="hero-chips">
+                    <span class="hero-chip">🏭 Fabrication locale</span>
+                    <span class="hero-chip">📏 Capacité sur mesure</span>
+                    <span class="hero-chip">💬 Commande WhatsApp</span>
+                </div>
+                <div class="hero-buttons">
+                    <a href="produits.html" class="btn btn-primary">Voir nos couveuses</a>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20souhaite%20avoir%20plus%20d%27informations" target="_blank" class="btn btn-wa">Commander sur WhatsApp</a>
                 </div>
             </div>
 
-            <!-- MODELE 2 -->
-            <div class="product-card reveal" style="transition-delay:0.2s;">
-                <span class="card-badge card-badge-auto">Automatique</span>
-                <img class="card-img" src="images/1_1000.jpeg" alt="Couveuse automatique">
-                <div class="card-body">
-                    <span class="card-cat">Automatique</span>
-                    <h3 class="card-title">Grande Capacité</h3>
-                    <p class="card-price">À partir de 200 000 FCFA</p>
-                    <a href="produits.html" class="card-btn">Voir le modèle</a>
-                </div>
-            </div>
-
-            <!-- MODELE 3 -->
-            <div class="product-card reveal" style="transition-delay:0.4s;">
-                <span class="card-badge card-badge-semi">Semi-auto</span>
-                <img class="card-img" src="images/1_400.jpeg" alt="Couveuse semi-automatique">
-                <div class="card-body">
-                    <span class="card-cat">Semi-automatique</span>
-                    <h3 class="card-title">Contrôle Digital</h3>
-                    <p class="card-price">À partir de 100 000 FCFA</p>
-                    <a href="produits.html" class="card-btn">Voir le modèle</a>
+            <div class="video-wrap reveal" style="transition-delay:.2s;">
+                <div class="video-frame">
+                    <div class="video-bar"><i></i><i></i><i></i><span>🎬 Présentation SAM VOLAILLE</span></div>
+                    <div class="video-box">
+                        <video id="heroVideo" controls playsinline preload="metadata">
+                            <source src="videos/presentation.mp4#t=0.5" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
+                        <button type="button" class="video-play" id="videoPlay" aria-label="Lancer la vidéo de présentation">
+                            <span class="play-circle">▶</span>
+                            <span>Découvrir nos couveuses en vidéo</span>
+                        </button>
+                    </div>
+                    <p class="video-caption">Fabriquées à Bamako, pensées pour les éleveurs maliens</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- CTA -->
-    <div class="cta-section reveal">
-        <h2>Prêt à développer votre élevage ?</h2>
-        <p>Découvrez notre gamme complète avec tous les prix adaptés à votre budget, et nos capacités personnalisées jusqu'à 5 000 œufs et plus sur commande.</p>
-        <a href="produits.html" class="btn btn-primary" style="font-size:1.2rem; padding:18px 45px;">Voir tout le catalogue</a>
+        <div class="wave" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="#fdf8e6" d="M0,48 C240,90 480,0 720,32 C960,64 1200,88 1440,40 L1440,80 L0,80 Z"></path></svg>
+        </div>
+    </header>
+
+    <!-- ================= CORPS : PRODUITS + POURQUOI NOUS ================= -->
+    <div class="farm-bg">
+        <span class="blob blob-1"></span>
+        <span class="blob blob-2"></span>
+        <span class="blob blob-3"></span>
+        <span class="deco deco-a" aria-hidden="true">🌿</span>
+        <span class="deco deco-b" aria-hidden="true">🐥</span>
+        <span class="deco deco-c" aria-hidden="true">🌾</span>
+
+        <section id="vedettes">
+            <div class="sec-title reveal">
+                <div class="sec-tag">Nos modèles</div>
+                <h2>Couveuses populaires</h2>
+                <div class="underline"></div>
+                <p class="subtitle-sec">Trois modèles pour démarrer ou agrandir votre élevage, avec des capacités adaptées à vos besoins, jusqu'à 5 000 œufs et plus sur commande.</p>
+            </div>
+
+            <div class="cards-grid">
+
+                <!-- MODELE 1 : MANUELLE -->
+                <div class="product-card reveal" data-category="manuelle">
+                    <div class="card-inner">
+                        <div class="card-image-wrap">
+                            <span class="card-badge card-badge-manuelle">Manuelle</span>
+                            <span class="card-number">01</span>
+                            <img class="card-img" src="images/3_400.jpeg" alt="Couveuse manuelle" loading="lazy">
+                        </div>
+                        <div class="card-body">
+                            <div class="egg-badge"><strong>300</strong><span>œufs</span></div>
+                            <span class="card-cat">Couveuse manuelle</span>
+                            <h3 class="card-title">Modèle Compact</h3>
+                            <div class="card-chips">
+                                <span class="chip">🖐️ Retournement manuel</span>
+                                <span class="chip">💰 Économique</span>
+                            </div>
+                            <div class="cap-label"><span>Capacité</span><span>300 œufs</span></div>
+                            <div class="cap-bar"><span style="--w:15%"></span></div>
+                            <div class="card-price-row">
+                                <span class="card-price-label">À partir de</span>
+                                <p class="card-price">90 000<small>FCFA</small></p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="produits.html#produits" class="card-btn">Voir le modèle →</a>
+                                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20manuelle%20Mod%C3%A8le%20Compact." target="_blank" class="card-wa" aria-label="Commander sur WhatsApp">💬</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODELE 2 : AUTOMATIQUE -->
+                <div class="product-card reveal" data-category="auto" style="transition-delay:.15s;">
+                    <div class="card-inner">
+                        <div class="card-image-wrap">
+                            <span class="card-badge card-badge-auto">Automatique</span>
+                            <span class="card-number">02</span>
+                            <img class="card-img" src="images/1_1000.jpeg" alt="Couveuse automatique" loading="lazy">
+                        </div>
+                        <div class="card-body">
+                            <div class="egg-badge"><strong>200+</strong><span>œufs</span></div>
+                            <span class="card-cat">Couveuse automatique</span>
+                            <h3 class="card-title">Automatique</h3>
+                            <div class="card-chips">
+                                <span class="chip">🔄 Retournement automatique</span>
+                                <span class="chip">⏱️ Gain de temps</span>
+                            </div>
+                            <div class="cap-label"><span>Capacité dès</span><span>200 œufs</span></div>
+                            <div class="cap-bar"><span style="--w:10%"></span></div>
+                            <div class="card-price-row">
+                                <span class="card-price-label">À partir de</span>
+                                <p class="card-price">200 000<small>FCFA</small></p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="produits.html#produits" class="card-btn">Voir le modèle →</a>
+                                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20couveuses%20automatiques." target="_blank" class="card-wa" aria-label="Commander sur WhatsApp">💬</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODELE 3 : SEMI-AUTOMATIQUE -->
+                <div class="product-card reveal" data-category="semi-auto" style="transition-delay:.3s;">
+                    <div class="card-inner">
+                        <div class="card-image-wrap">
+                            <span class="card-badge card-badge-semi">Semi-auto</span>
+                            <span class="card-number">03</span>
+                            <img class="card-img" src="images/1_400.jpeg" alt="Couveuse semi-automatique" loading="lazy">
+                        </div>
+                        <div class="card-body">
+                            <div class="egg-badge"><strong>150+</strong><span>œufs</span></div>
+                            <span class="card-cat">Couveuse semi-automatique</span>
+                            <h3 class="card-title">Contrôle Digital</h3>
+                            <div class="card-chips">
+                                <span class="chip">📟 Contrôle digital</span>
+                                <span class="chip">⚖️ Bon compromis</span>
+                            </div>
+                            <div class="cap-label"><span>Capacité dès</span><span>150 œufs</span></div>
+                            <div class="cap-bar"><span style="--w:8%"></span></div>
+                            <div class="card-price-row">
+                                <span class="card-price-label">À partir de</span>
+                                <p class="card-price">100 000<small>FCFA</small></p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="produits.html#produits" class="card-btn">Voir le modèle →</a>
+                                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20couveuses%20semi-automatiques." target="_blank" class="card-wa" aria-label="Commander sur WhatsApp">💬</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="pourquoi" style="padding-top:20px;">
+            <div class="sec-title reveal">
+                <div class="sec-tag">Nos atouts</div>
+                <h2>Pourquoi SAM VOLAILLE ?</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="features-grid">
+                <div class="feature reveal">
+                    <div class="feature-inner">
+                        <div class="feature-icon">🏭</div>
+                        <h3>Fabricant local</h3>
+                        <p>Des couveuses conçues et fabriquées à Bamako, pour les éleveurs du Mali.</p>
+                    </div>
+                </div>
+                <div class="feature reveal" style="transition-delay:.1s;">
+                    <div class="feature-inner">
+                        <div class="feature-icon">📏</div>
+                        <h3>Capacité sur mesure</h3>
+                        <p>Des petits modèles jusqu'à 5 000 œufs et plus, sur commande.</p>
+                    </div>
+                </div>
+                <div class="feature reveal" style="transition-delay:.2s;">
+                    <div class="feature-inner">
+                        <div class="feature-icon">💰</div>
+                        <h3>Prix avantageux</h3>
+                        <p>Une gamme manuelle, semi-automatique et automatique, adaptée à chaque budget.</p>
+                    </div>
+                </div>
+                <div class="feature reveal" style="transition-delay:.3s;">
+                    <div class="feature-inner">
+                        <div class="feature-icon">💬</div>
+                        <h3>Commande simple</h3>
+                        <p>Un message sur WhatsApp suffit pour demander un devis ou commander.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-wrap">
+            <div class="cta-section reveal">
+                <h2>Prêt à développer votre élevage ?</h2>
+                <p>Découvrez notre gamme complète avec tous les prix adaptés à votre budget, et nos capacités personnalisées jusqu'à 5 000 œufs et plus sur commande.</p>
+                <div class="cta-buttons">
+                    <a href="produits.html" class="btn btn-primary" style="font-size:1.1rem; padding:17px 40px;">Voir tout le catalogue</a>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20souhaite%20avoir%20plus%20d%27informations" target="_blank" class="btn btn-wa" style="font-size:1.1rem; padding:17px 40px;">Écrire sur WhatsApp</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- FOOTER PROFESSIONNEL -->
+    <!-- ================= PIED DE PAGE ================= -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col footer-about">
+                <div class="footer-brand"><span class="logo-sam">SAM</span> VOLAILLE 🐣</div>
                 <h3>Qui sommes-nous ?</h3>
                 <p>SAM VOLAILLE est une entreprise malienne spécialisée dans la conception, la fabrication et la vente de couveuses d'œufs modernes. Basés à Bamako, nous accompagnons les éleveurs locaux avec des solutions fiables et abordables.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-icon" aria-label="Facebook">f</a>
-                    <a href="#" class="social-icon" aria-label="Instagram">📷</a>
-                    <!-- 🔗 URL TikTok à remplacer -->
                     <a href="https://www.tiktok.com/@moustaphesam1" target="_blank" rel="noopener" class="social-icon" aria-label="TikTok">🎵</a>
+                    <a href="https://wa.me/22373020233" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">💬</a>
                 </div>
             </div>
 
@@ -309,14 +605,15 @@
                 </ul>
             </div>
 
-            <div class="footer-col footer-contact">
+            <div class="footer-col footer-contact" id="contact">
                 <h3>Coordonnées</h3>
                 <p><i>📍</i> Golf, Bamako, Mali</p>
                 <p><i>📞</i> +223 73 02 02 33</p>
                 <p><i>🕒</i> Lun - Sam : 08h00 - 18h00</p>
+                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20souhaite%20avoir%20plus%20d%27informations" target="_blank" class="footer-wa">💬 Nous écrire sur WhatsApp</a>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>© 2026 <strong>SAM VOLAILLE</strong>. Tous droits réservés.</p>
             <p style="margin-top:5px;">Développé avec ❤️ pour les éleveurs maliens</p>
@@ -327,18 +624,55 @@
 
     <script>
         function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
-        document.addEventListener('DOMContentLoaded', () => {
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apparition au scroll
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-            }, { threshold: 0.2 });
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("active"); });
+            }, { threshold:.15 });
+            document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
             // Ferme le menu mobile après un clic sur un lien
-            document.querySelectorAll('#navLinks a').forEach(link => {
-                link.addEventListener('click', () => {
+            document.querySelectorAll("#navLinks a").forEach(link => {
+                link.addEventListener("click", () => {
                     document.getElementById("navLinks").classList.remove("active");
                 });
             });
+
+            // Barre de navigation qui se compacte au scroll
+            const nav = document.getElementById("mainNav");
+            const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 30);
+            window.addEventListener("scroll", onScroll, { passive:true });
+            onScroll();
+
+            // Vidéo : bouton lecture par-dessus, masqué pendant la lecture
+            const video = document.getElementById("heroVideo");
+            const playBtn = document.getElementById("videoPlay");
+            playBtn.addEventListener("click", () => { video.play(); });
+            video.addEventListener("play", () => playBtn.classList.add("hidden"));
+            video.addEventListener("ended", () => playBtn.classList.remove("hidden"));
+
+            // Effet 3D + reflet sur les cartes (souris uniquement)
+            const canTilt = window.matchMedia("(hover:hover) and (pointer:fine)").matches
+                && !window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+            if (canTilt) {
+                document.querySelectorAll(".product-card").forEach(card => {
+                    const inner = card.querySelector(".card-inner");
+                    card.addEventListener("mousemove", (e) => {
+                        const r = card.getBoundingClientRect();
+                        const x = (e.clientX - r.left) / r.width;
+                        const y = (e.clientY - r.top) / r.height;
+                        inner.style.setProperty("--ry", ((x - .5) * 10) + "deg");
+                        inner.style.setProperty("--rx", ((.5 - y) * 10) + "deg");
+                        inner.style.setProperty("--mx", (x * 100) + "%");
+                        inner.style.setProperty("--my", (y * 100) + "%");
+                    });
+                    card.addEventListener("mouseleave", () => {
+                        inner.style.setProperty("--rx", "0deg");
+                        inner.style.setProperty("--ry", "0deg");
+                    });
+                });
+            }
         });
     </script>
 </body>
