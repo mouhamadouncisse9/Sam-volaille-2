@@ -52,64 +52,110 @@
 
         /* FILTRES */
         .filter-buttons { display:flex; justify-content:center; flex-wrap:wrap; gap:15px; margin-bottom:50px; }
-        .filter-btn { padding:12px 25px; background:white; border:2px solid var(--vert-fonce); color:var(--vert-fonce); border-radius:50px; cursor:pointer; font-weight:700; font-size:.95rem; transition:all .3s; box-shadow:0 4px 10px rgba(0,0,0,.05); }
+        .filter-btn { padding:12px 25px; background:rgba(255,255,255,.7); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--vert-fonce); color:var(--vert-fonce); border-radius:50px; cursor:pointer; font-weight:700; font-size:.95rem; transition:all .3s; box-shadow:0 4px 10px rgba(0,0,0,.05); }
         .filter-btn.active,.filter-btn:hover { background:linear-gradient(135deg,var(--vert-fonce),var(--vert-moyen)); color:white; transform:translateY(-3px); }
 
-        /* CARTES PRODUITS - DESIGN MODERNE */
+        /* ===== FOND "FERME" DE LA SECTION PRODUITS ===== */
+        .farm-bg {
+            position:relative;
+            overflow:hidden;
+            background:
+                radial-gradient(1100px 520px at 8% -8%, rgba(251,192,45,.30), transparent 60%),
+                radial-gradient(900px 520px at 100% 25%, rgba(102,187,106,.32), transparent 60%),
+                radial-gradient(700px 400px at 0% 100%, rgba(251,192,45,.22), transparent 60%),
+                linear-gradient(180deg,#fdf8e6 0%,#eef7ea 55%,var(--gris-fond) 100%);
+        }
+        /* grain de blé : petits points chauds en motif */
+        .farm-bg::before {
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.55;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(251,192,45,.35) 0 2px, transparent 3px),
+                radial-gradient(circle at 70% 60%, rgba(46,125,50,.22) 0 2px, transparent 3px),
+                radial-gradient(circle at 45% 85%, rgba(251,192,45,.30) 0 2px, transparent 3px);
+            background-size:120px 120px, 160px 160px, 200px 200px;
+        }
+        .farm-bg > section { position:relative; z-index:2; }
+        .blob { position:absolute; border-radius:50%; filter:blur(60px); opacity:.55; pointer-events:none; z-index:1; animation:drift 14s ease-in-out infinite alternate; }
+        .blob-1 { width:340px; height:340px; background:#fbc02d; top:18%; left:-90px; }
+        .blob-2 { width:380px; height:380px; background:#66bb6a; top:48%; right:-110px; animation-delay:-5s; }
+        .blob-3 { width:300px; height:300px; background:#ffe082; bottom:6%; left:30%; animation-delay:-9s; }
+        @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(40px,-30px) scale(1.12)} }
+        .deco { position:absolute; z-index:1; font-size:2.2rem; opacity:.35; pointer-events:none; animation:floaty 6s ease-in-out infinite; }
+        .deco-1 { top:14%; right:7%; }
+        .deco-2 { top:42%; left:3%; animation-delay:-2s; font-size:2.8rem; }
+        .deco-3 { bottom:10%; right:12%; animation-delay:-4s; }
+        .deco-4 { bottom:26%; left:9%; animation-delay:-1s; font-size:1.8rem; }
+        @keyframes floaty { 0%,100%{transform:translateY(0) rotate(-6deg)} 50%{transform:translateY(-16px) rotate(6deg)} }
+
+        /* ===== CARTES PRODUITS : VERRE TRANSPARENT ===== */
         .product-grid {
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
-            gap:26px;
+            gap:30px;
         }
         .product-card {
-            background:linear-gradient(180deg,#fff 0%,#fcfffc 100%);
-            border-radius:24px;
-            overflow:hidden;
-            box-shadow:0 10px 30px rgba(27,94,32,.08);
-            transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);
             position:relative;
-            border:1px solid #e7eee7;
             display:flex;
-            flex-direction:column;
+            perspective:1000px;
+            --accent:var(--vert-moyen);
+            --accent-soft:rgba(46,125,50,.14);
         }
-        .product-card::after {
-            content:"";
-            position:absolute;
-            inset:0;
-            border-radius:24px;
-            pointer-events:none;
-            border:1px solid rgba(102,187,106,.15);
-        }
-        .product-card:hover {
-            transform:translateY(-10px);
-            box-shadow:0 24px 50px rgba(27,94,32,.16);
-            border-color:#c9dfca;
-        }
-        .card-image-wrap {
-            height:245px;
+        .product-card[data-category="manuelle"] { --accent:#43a047; --accent-soft:rgba(102,187,106,.20); }
+        .product-card[data-category="semi-auto"] { --accent:#f9a825; --accent-soft:rgba(251,192,45,.24); }
+        .product-card[data-category="auto"] { --accent:#1b5e20; --accent-soft:rgba(27,94,32,.14); }
+        .product-card.pop { animation:pop .5s var(--ease); }
+        @keyframes pop { from{opacity:0;transform:scale(.92) translateY(14px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
+        .card-inner {
             position:relative;
+            display:flex; flex-direction:column;
+            width:100%;
+            border-radius:28px;
             overflow:hidden;
+            background:linear-gradient(160deg,rgba(255,255,255,.74),rgba(255,255,255,.36));
+            -webkit-backdrop-filter:blur(18px) saturate(150%);
+            backdrop-filter:blur(18px) saturate(150%);
+            border:1px solid rgba(255,255,255,.8);
+            box-shadow:0 14px 40px rgba(27,94,32,.14), inset 0 1px 0 rgba(255,255,255,.95);
+            transform-style:preserve-3d;
+            transform:translateY(var(--ty,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+            transition:transform .25s ease-out, box-shadow .4s var(--ease), border-color .4s;
+            will-change:transform;
+        }
+        @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+            .card-inner { background:rgba(255,255,255,.92); }
+        }
+        .product-card:hover .card-inner {
+            --ty:-8px;
+            border-color:#fff;
+            box-shadow:0 28px 60px rgba(27,94,32,.22), 0 0 0 2px var(--accent-soft), inset 0 1px 0 #fff;
+        }
+        /* reflet lumineux qui suit la souris */
+        .card-inner::before {
+            content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
+            background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%), rgba(255,255,255,.55), transparent 45%);
+            opacity:0; transition:opacity .3s;
+        }
+        .product-card:hover .card-inner::before { opacity:1; }
+
+        .card-image-wrap {
+            height:235px; position:relative; overflow:hidden;
             background:linear-gradient(135deg,#eef7ee,#fff);
+            clip-path:ellipse(78% 100% at 50% 0%);
         }
         .card-image-wrap::after {
-            content:"";
-            position:absolute;
-            left:0; right:0; bottom:0; height:75px;
-            background:linear-gradient(to top,rgba(0,0,0,.13),transparent);
-            pointer-events:none;
+            content:""; position:absolute; inset:0; pointer-events:none;
+            background:linear-gradient(to top,rgba(0,0,0,.20),transparent 55%);
         }
-        .card-img {
-            width:100%; height:100%; object-fit:cover;
-            display:block;
-            transition:transform .7s var(--ease);
-        }
-        .product-card:hover .card-img { transform:scale(1.07); }
+        .card-img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .8s var(--ease); }
+        .product-card:hover .card-img { transform:scale(1.09); }
+
         .card-badge {
             position:absolute; top:16px; left:16px; z-index:3;
             padding:7px 14px; border-radius:30px;
             font-size:.74rem; font-weight:800; letter-spacing:.4px;
-            box-shadow:0 6px 16px rgba(0,0,0,.16);
-            color:white; backdrop-filter:blur(5px);
+            box-shadow:0 6px 16px rgba(0,0,0,.18);
+            color:white; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);
         }
         .card-badge-manuelle { background:var(--vert-clair); }
         .card-badge-semi { background:var(--jaune); color:var(--noir); }
@@ -117,34 +163,79 @@
         .card-number {
             position:absolute; right:15px; top:15px; z-index:3;
             width:35px; height:35px; border-radius:50%;
-            background:rgba(255,255,255,.9); color:var(--vert-fonce);
+            background:rgba(255,255,255,.85); color:var(--vert-fonce);
             display:flex; align-items:center; justify-content:center;
             font-size:.78rem; font-weight:800;
             box-shadow:0 5px 15px rgba(0,0,0,.12);
         }
-        .card-body { padding:24px; display:flex; flex-direction:column; flex-grow:1; }
-        .card-cat {
-            font-size:.72rem; font-weight:800; color:var(--vert-moyen);
-            text-transform:uppercase; letter-spacing:1.2px; margin-bottom:7px;
+
+        .card-body { position:relative; padding:26px 24px 24px; display:flex; flex-direction:column; flex-grow:1; }
+
+        /* bulle en forme d'oeuf : capacité */
+        .egg-badge {
+            position:absolute; top:-46px; right:20px; z-index:6;
+            width:78px; height:94px;
+            border-radius:50% 50% 50% 50% / 62% 62% 38% 38%;
+            background:linear-gradient(150deg,#ffffff 0%,#fff3c4 100%);
+            border:2px solid rgba(255,255,255,.9);
+            box-shadow:0 12px 24px rgba(0,0,0,.18), inset 0 -6px 12px rgba(251,192,45,.25);
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            text-align:center; line-height:1.05;
+            animation:bob 4.5s ease-in-out infinite;
         }
-        .card-title { font-size:1.25rem; font-weight:800; margin-bottom:10px; color:#242424; }
-        .card-price-label { font-size:.76rem; color:#777; margin-bottom:2px; }
-        .card-price { font-size:1.65rem; font-weight:900; color:var(--vert-fonce); margin:0 0 20px; }
+        .egg-badge strong { font-size:1.25rem; font-weight:900; color:var(--vert-fonce); }
+        .egg-badge span { font-size:.62rem; font-weight:800; color:#8d6e00; text-transform:uppercase; letter-spacing:.5px; margin-top:3px; }
+        @keyframes bob { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-7px) rotate(4deg)} }
+
+        .card-cat {
+            font-size:.72rem; font-weight:800; color:var(--accent);
+            text-transform:uppercase; letter-spacing:1.2px; margin-bottom:7px; padding-right:90px;
+        }
+        .card-title { font-size:1.28rem; font-weight:800; margin-bottom:14px; color:#1f2a1f; padding-right:90px; line-height:1.3; }
+
+        .card-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+        .chip {
+            font-size:.74rem; font-weight:700; color:#2f3d2f;
+            background:var(--accent-soft); border:1px solid rgba(255,255,255,.7);
+            padding:5px 11px; border-radius:30px;
+        }
+
+        .cap-label { display:flex; justify-content:space-between; font-size:.72rem; font-weight:700; color:#6b756b; margin-bottom:5px; text-transform:uppercase; letter-spacing:.6px; }
+        .cap-bar { height:8px; border-radius:20px; background:rgba(27,94,32,.10); overflow:hidden; margin-bottom:20px; }
+        .cap-bar span {
+            display:block; height:100%; width:0; border-radius:20px;
+            background:linear-gradient(90deg,var(--jaune),var(--vert-clair));
+            transition:width 1.2s var(--ease) .3s;
+        }
+        .reveal.active .cap-bar span { width:var(--w,50%); }
+
+        .card-price-row { display:flex; align-items:baseline; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+        .card-price-label { font-size:.76rem; color:#6f776f; font-weight:600; }
+        .card-price { font-size:1.7rem; font-weight:900; color:var(--vert-fonce); line-height:1.1; }
+        .card-price small { font-size:.8rem; font-weight:800; color:#5b665b; margin-left:3px; }
+
         .card-btn {
             display:flex; align-items:center; justify-content:center; gap:8px;
-            background:#25D366; color:white; text-align:center;
-            padding:14px 15px; border-radius:13px; text-decoration:none;
+            background:linear-gradient(135deg,#25D366,#1fb855); color:white; text-align:center;
+            padding:14px 15px; border-radius:14px; text-decoration:none;
             font-weight:800; position:relative; overflow:hidden;
             transition:transform .3s var(--ease),box-shadow .3s var(--ease);
             margin-top:auto;
+            box-shadow:0 8px 18px rgba(37,211,102,.25);
         }
         .card-btn::before {
             content:""; position:absolute; top:0; left:-100%; width:100%; height:100%;
-            background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
             transition:left .5s;
         }
         .card-btn:hover::before { left:100%; }
-        .card-btn:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(37,211,102,.3); }
+        .card-btn:hover { transform:translateY(-2px); box-shadow:0 12px 24px rgba(37,211,102,.38); }
+
+        @media (prefers-reduced-motion:reduce) {
+            .blob,.deco,.egg-badge,.product-card.pop { animation:none; }
+            .card-inner { transition:none; }
+            .cap-bar span { transition:none; }
+        }
 
         /* PRIX */
         .price-tabs { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:30px; }
@@ -154,7 +245,7 @@
         .price-tab-manuelle { background:var(--vert-clair); }
         .price-tab-semi { background:var(--jaune); color:var(--noir); }
         .price-tab-auto { background:var(--vert-fonce); }
-        .price-table-container { background:var(--carte-fond); border-radius:20px; padding:15px 30px; margin-bottom:30px; box-shadow:0 10px 25px rgba(0,0,0,.08); }
+        .price-table-container { background:rgba(255,255,255,.75); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.85); border-radius:20px; padding:15px 30px; margin-bottom:30px; box-shadow:0 10px 25px rgba(0,0,0,.08); }
         .price-panel { display:none; }
         .price-panel.active { display:block; animation:fadeIn .35s var(--ease); }
         @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
@@ -208,7 +299,8 @@
             .nav-container { padding:0 15px; }
             .price-table-container { padding:20px 15px; }
             .custom-capacity { padding:30px 20px; }
-            .card-image-wrap { height:220px; }
+            .card-image-wrap { height:215px; }
+            .deco { font-size:1.6rem; }
         }
         @media (max-width:400px) {
             .logo-text { display:none; }
@@ -236,6 +328,15 @@
     </div>
 </nav>
 
+<div class="farm-bg">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="deco deco-1" aria-hidden="true">🌾</span>
+    <span class="deco deco-2" aria-hidden="true">🐥</span>
+    <span class="deco deco-3" aria-hidden="true">🥚</span>
+    <span class="deco deco-4" aria-hidden="true">🌿</span>
+
 <section id="produits">
     <div class="sec-title reveal">
         <div class="sec-tag">Catalogue complet</div>
@@ -253,120 +354,198 @@
 
     <div class="product-grid">
 
-        <!-- MANUELLE -->
+        <!-- 01 MANUELLE -->
         <div class="product-card reveal" data-category="manuelle">
-            <div class="card-image-wrap">
-                <span class="card-badge card-badge-manuelle">Manuelle</span>
-                <span class="card-number">01</span>
-                <img class="card-img" src="images/3_400.jpeg" alt="Couveuse manuelle">
-            </div>
-            <div class="card-body">
-                <span class="card-cat">Couveuse manuelle</span>
-                <h3 class="card-title">Modèle Compact</h3>
-                <span class="card-price-label">À partir de</span>
-                <p class="card-price">90 000 FCFA</p>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20manuelle%20Mod%C3%A8le%20Compact." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+            <div class="card-inner">
+                <div class="card-image-wrap">
+                    <span class="card-badge card-badge-manuelle">Manuelle</span>
+                    <span class="card-number">01</span>
+                    <img class="card-img" src="images/3_400.jpeg" alt="Couveuse manuelle" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div class="egg-badge"><strong>300</strong><span>œufs</span></div>
+                    <span class="card-cat">Couveuse manuelle</span>
+                    <h3 class="card-title">Modèle Compact</h3>
+                    <div class="card-chips">
+                        <span class="chip">🖐️ Retournement manuel</span>
+                        <span class="chip">💰 Économique</span>
+                    </div>
+                    <div class="cap-label"><span>Capacité</span><span>300 œufs</span></div>
+                    <div class="cap-bar"><span style="--w:15%"></span></div>
+                    <div class="card-price-row">
+                        <span class="card-price-label">À partir de</span>
+                        <p class="card-price">90 000<small>FCFA</small></p>
+                    </div>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20manuelle%20Mod%C3%A8le%20Compact." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+                </div>
             </div>
         </div>
 
-        <!-- AUTOMATIQUE 1000 -->
+        <!-- 02 AUTOMATIQUE 1000 -->
         <div class="product-card reveal" data-category="auto" style="transition-delay:.1s;">
-            <div class="card-image-wrap">
-                <span class="card-badge card-badge-auto">Automatique</span>
-                <span class="card-number">02</span>
-                <img class="card-img" src="images/1_1000.jpeg" alt="Couveuse automatique 1000 œufs">
-            </div>
-            <div class="card-body">
-                <span class="card-cat">Couveuse automatique</span>
-                <h3 class="card-title">Automatique 1 000</h3>
-                <span class="card-price-label">Prix indicatif</span>
-                <p class="card-price">500 000 FCFA</p>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%201000%20%C5%93ufs." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+            <div class="card-inner">
+                <div class="card-image-wrap">
+                    <span class="card-badge card-badge-auto">Automatique</span>
+                    <span class="card-number">02</span>
+                    <img class="card-img" src="images/1_1000.jpeg" alt="Couveuse automatique 1000 œufs" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div class="egg-badge"><strong>1 000</strong><span>œufs</span></div>
+                    <span class="card-cat">Couveuse automatique</span>
+                    <h3 class="card-title">Automatique 1 000</h3>
+                    <div class="card-chips">
+                        <span class="chip">🔄 Retournement automatique</span>
+                        <span class="chip">⏱️ Gain de temps</span>
+                    </div>
+                    <div class="cap-label"><span>Capacité</span><span>1 000 œufs</span></div>
+                    <div class="cap-bar"><span style="--w:50%"></span></div>
+                    <div class="card-price-row">
+                        <span class="card-price-label">Prix indicatif</span>
+                        <p class="card-price">500 000<small>FCFA</small></p>
+                    </div>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%201000%20%C5%93ufs." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+                </div>
             </div>
         </div>
 
-        <!-- AUTOMATIQUE GRANDE CAPACITE -->
+        <!-- 03 AUTOMATIQUE GRANDE CAPACITE -->
         <div class="product-card reveal" data-category="auto" style="transition-delay:.15s;">
-            <div class="card-image-wrap">
-                <span class="card-badge card-badge-auto">Automatique</span>
-                <span class="card-number">03</span>
-                <img class="card-img" src="images/auto.jpeg" alt="Couveuse automatique grande capacité">
-            </div>
-            <div class="card-body">
-                <span class="card-cat">Couveuse automatique</span>
-                <h3 class="card-title">Grande Capacité</h3>
-                <span class="card-price-label">Prix indicatif</span>
-                <p class="card-price">600 000 FCFA</p>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20grande%20capacit%C3%A9." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+            <div class="card-inner">
+                <div class="card-image-wrap">
+                    <span class="card-badge card-badge-auto">Automatique</span>
+                    <span class="card-number">03</span>
+                    <img class="card-img" src="images/auto.jpeg" alt="Couveuse automatique grande capacité" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div class="egg-badge"><strong>XL</strong><span>sur mesure</span></div>
+                    <span class="card-cat">Couveuse automatique</span>
+                    <h3 class="card-title">Grande Capacité</h3>
+                    <div class="card-chips">
+                        <span class="chip">🔄 Retournement automatique</span>
+                        <span class="chip">🏭 Gros élevages</span>
+                    </div>
+                    <div class="cap-label"><span>Capacité</span><span>Grande capacité</span></div>
+                    <div class="cap-bar"><span style="--w:100%"></span></div>
+                    <div class="card-price-row">
+                        <span class="card-price-label">Prix indicatif</span>
+                        <p class="card-price">600 000<small>FCFA</small></p>
+                    </div>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20grande%20capacit%C3%A9." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+                </div>
             </div>
         </div>
 
-        <!-- AUTOMATIQUE 200 -->
+        <!-- 04 AUTOMATIQUE 200 -->
         <div class="product-card reveal" data-category="auto" style="transition-delay:.2s;">
-            <div class="card-image-wrap">
-                <span class="card-badge card-badge-auto">Automatique</span>
-                <span class="card-number">04</span>
-                <img class="card-img" src="images/auto_200.jpeg" alt="Couveuse automatique 200 œufs">
-            </div>
-            <div class="card-body">
-                <span class="card-cat">Couveuse automatique</span>
-                <h3 class="card-title">Automatique 200</h3>
-                <span class="card-price-label">Prix indicatif</span>
-                <p class="card-price">200 000 FCFA</p>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20200." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+            <div class="card-inner">
+                <div class="card-image-wrap">
+                    <span class="card-badge card-badge-auto">Automatique</span>
+                    <span class="card-number">04</span>
+                    <img class="card-img" src="images/auto_200.jpeg" alt="Couveuse automatique 200 œufs" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div class="egg-badge"><strong>200</strong><span>œufs</span></div>
+                    <span class="card-cat">Couveuse automatique</span>
+                    <h3 class="card-title">Automatique 200</h3>
+                    <div class="card-chips">
+                        <span class="chip">🔄 Retournement automatique</span>
+                        <span class="chip">🐣 Idéale pour démarrer</span>
+                    </div>
+                    <div class="cap-label"><span>Capacité</span><span>200 œufs</span></div>
+                    <div class="cap-bar"><span style="--w:10%"></span></div>
+                    <div class="card-price-row">
+                        <span class="card-price-label">Prix indicatif</span>
+                        <p class="card-price">200 000<small>FCFA</small></p>
+                    </div>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20200." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+                </div>
             </div>
         </div>
 
-        <!-- AUTOMATIQUE 500 -->
+        <!-- 05 AUTOMATIQUE 500 -->
         <div class="product-card reveal" data-category="auto" style="transition-delay:.25s;">
-            <div class="card-image-wrap">
-                <span class="card-badge card-badge-auto">Automatique</span>
-                <span class="card-number">05</span>
-                <img class="card-img" src="images/auto_500.jpeg" alt="Couveuse automatique 500 œufs">
-            </div>
-            <div class="card-body">
-                <span class="card-cat">Couveuse automatique</span>
-                <h3 class="card-title">Automatique 500</h3>
-                <span class="card-price-label">Prix indicatif</span>
-                <p class="card-price">250 000 FCFA</p>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20500." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+            <div class="card-inner">
+                <div class="card-image-wrap">
+                    <span class="card-badge card-badge-auto">Automatique</span>
+                    <span class="card-number">05</span>
+                    <img class="card-img" src="images/auto_500.jpeg" alt="Couveuse automatique 500 œufs" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div class="egg-badge"><strong>500</strong><span>œufs</span></div>
+                    <span class="card-cat">Couveuse automatique</span>
+                    <h3 class="card-title">Automatique 500</h3>
+                    <div class="card-chips">
+                        <span class="chip">🔄 Retournement automatique</span>
+                        <span class="chip">⏱️ Gain de temps</span>
+                    </div>
+                    <div class="cap-label"><span>Capacité</span><span>500 œufs</span></div>
+                    <div class="cap-bar"><span style="--w:25%"></span></div>
+                    <div class="card-price-row">
+                        <span class="card-price-label">Prix indicatif</span>
+                        <p class="card-price">250 000<small>FCFA</small></p>
+                    </div>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20500." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+                </div>
             </div>
         </div>
 
-        <!-- AUTOMATIQUE 400 -->
+        <!-- 06 AUTOMATIQUE 400 -->
         <div class="product-card reveal" data-category="auto" style="transition-delay:.3s;">
-            <div class="card-image-wrap">
-                <span class="card-badge card-badge-auto">Automatique</span>
-                <span class="card-number">06</span>
-                <img class="card-img" src="images/auto_400.jpeg" alt="Couveuse automatique 400 œufs">
-            </div>
-            <div class="card-body">
-                <span class="card-cat">Couveuse automatique</span>
-                <h3 class="card-title">Automatique 400</h3>
-                <span class="card-price-label">Prix indicatif</span>
-                <p class="card-price">225 000 FCFA</p>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20400." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+            <div class="card-inner">
+                <div class="card-image-wrap">
+                    <span class="card-badge card-badge-auto">Automatique</span>
+                    <span class="card-number">06</span>
+                    <img class="card-img" src="images/auto_400.jpeg" alt="Couveuse automatique 400 œufs" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div class="egg-badge"><strong>400</strong><span>œufs</span></div>
+                    <span class="card-cat">Couveuse automatique</span>
+                    <h3 class="card-title">Automatique 400</h3>
+                    <div class="card-chips">
+                        <span class="chip">🔄 Retournement automatique</span>
+                        <span class="chip">⏱️ Gain de temps</span>
+                    </div>
+                    <div class="cap-label"><span>Capacité</span><span>400 œufs</span></div>
+                    <div class="cap-bar"><span style="--w:20%"></span></div>
+                    <div class="card-price-row">
+                        <span class="card-price-label">Prix indicatif</span>
+                        <p class="card-price">225 000<small>FCFA</small></p>
+                    </div>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20couveuse%20automatique%20400." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+                </div>
             </div>
         </div>
 
-        <!-- SEMI-AUTOMATIQUE -->
+        <!-- 07 SEMI-AUTOMATIQUE -->
         <div class="product-card reveal" data-category="semi-auto" style="transition-delay:.35s;">
-            <div class="card-image-wrap">
-                <span class="card-badge card-badge-semi">Semi-auto</span>
-                <span class="card-number">07</span>
-                <img class="card-img" src="images/1_400.jpeg" alt="Couveuse semi-automatique">
-            </div>
-            <div class="card-body">
-                <span class="card-cat">Couveuse semi-automatique</span>
-                <h3 class="card-title">Contrôle Digital</h3>
-                <span class="card-price-label">À partir de</span>
-                <p class="card-price">100 000 FCFA</p>
-                <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20couveuses%20semi-automatiques." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+            <div class="card-inner">
+                <div class="card-image-wrap">
+                    <span class="card-badge card-badge-semi">Semi-auto</span>
+                    <span class="card-number">07</span>
+                    <img class="card-img" src="images/1_400.jpeg" alt="Couveuse semi-automatique" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div class="egg-badge"><strong>150+</strong><span>œufs</span></div>
+                    <span class="card-cat">Couveuse semi-automatique</span>
+                    <h3 class="card-title">Contrôle Digital</h3>
+                    <div class="card-chips">
+                        <span class="chip">📟 Contrôle digital</span>
+                        <span class="chip">⚖️ Bon compromis</span>
+                    </div>
+                    <div class="cap-label"><span>Capacité dès</span><span>150 œufs</span></div>
+                    <div class="cap-bar"><span style="--w:8%"></span></div>
+                    <div class="card-price-row">
+                        <span class="card-price-label">À partir de</span>
+                        <p class="card-price">100 000<small>FCFA</small></p>
+                    </div>
+                    <a href="https://wa.me/22373020233?text=Bonjour%20SAM%20VOLAILLE%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20couveuses%20semi-automatiques." target="_blank" class="card-btn">💬 Commander sur WhatsApp</a>
+                </div>
             </div>
         </div>
 
     </div>
 </section>
+</div>
 
 <section id="prix">
     <div class="sec-title reveal">
@@ -475,10 +654,17 @@
         document.querySelectorAll(".product-card").forEach(card => {
             const show = category === "all" || card.dataset.category === category;
             card.style.display = show ? "flex" : "none";
+            if (show) {
+                card.classList.add("active");
+                card.classList.remove("pop");
+                void card.offsetWidth; // relance l'animation
+                card.classList.add("pop");
+            }
         });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+        // Apparition au scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add("active");
@@ -487,11 +673,37 @@
 
         document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
+        // Fermer le menu mobile après un clic
         document.querySelectorAll("#navLinks a").forEach(link => {
             link.addEventListener("click", () => {
                 document.getElementById("navLinks").classList.remove("active");
             });
         });
+
+        // Effet 3D + reflet sur les cartes (souris uniquement, pas sur mobile)
+        const canTilt = window.matchMedia("(hover:hover) and (pointer:fine)").matches
+            && !window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+        if (canTilt) {
+            document.querySelectorAll(".product-card").forEach(card => {
+                const inner = card.querySelector(".card-inner");
+
+                card.addEventListener("mousemove", (e) => {
+                    const r = card.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width;
+                    const y = (e.clientY - r.top) / r.height;
+                    inner.style.setProperty("--ry", ((x - .5) * 10) + "deg");
+                    inner.style.setProperty("--rx", ((.5 - y) * 10) + "deg");
+                    inner.style.setProperty("--mx", (x * 100) + "%");
+                    inner.style.setProperty("--my", (y * 100) + "%");
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    inner.style.setProperty("--rx", "0deg");
+                    inner.style.setProperty("--ry", "0deg");
+                });
+            });
+        }
     });
 </script>
 </body>
